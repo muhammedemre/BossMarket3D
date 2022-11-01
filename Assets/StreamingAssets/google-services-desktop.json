@@ -1,0 +1,36 @@
+{
+  "project_info": {
+    "project_number": "795884504956",
+    "project_id": "boss-market-3d",
+    "storage_bucket": "boss-market-3d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:795884504956:ios:26b664af025aaf987d46f9",
+        "android_client_info": {
+          "package_name": "com.Berry.BossMarket3D"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "795884504956-birkujngjkqgjhi263mv9ihq19m0f9mm.apps.googleusercontent.com"
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCqpaw7M2q281mmyjyRaJXYyq-1iwji4GY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 0
+        },
+        "appinvite_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
