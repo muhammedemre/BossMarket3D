@@ -2,6 +2,7 @@
 {
     public static LevelManager instance;
     public LevelCreateOfficer levelCreateOfficer;
+    public LevelPowerUpOfficer levelPowerUpOfficer;
 
     private void Awake()
     {

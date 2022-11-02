@@ -90,4 +90,8 @@ public class ItemStandItemHandleOfficer : MonoBehaviour
     {
         itemPositions = _itemPositions;
     }
+    public void AssignParticleContainer(Transform _particleContainer)
+    {
+        particles = _particleContainer;
+    }
 }

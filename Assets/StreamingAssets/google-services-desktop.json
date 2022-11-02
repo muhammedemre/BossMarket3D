@@ -7,27 +7,30 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:795884504956:ios:26b664af025aaf987d46f9",
+        "mobilesdk_app_id": "1:795884504956:android:e1acef474dd7323b7d46f9",
         "android_client_info": {
           "package_name": "com.Berry.BossMarket3D"
         }
       },
       "oauth_client": [
         {
-          "client_id": "795884504956-birkujngjkqgjhi263mv9ihq19m0f9mm.apps.googleusercontent.com"
+          "client_id": "795884504956-df0v0cic192q7bmcl6psipc035q89bfc.apps.googleusercontent.com",
+          "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCqpaw7M2q281mmyjyRaJXYyq-1iwji4GY"
+          "current_key": "AIzaSyDR9HCA2wijv7-EbPAiBch38GihaIR2FMo"
         }
       ],
       "services": {
-        "analytics_service": {
-          "status": 0
-        },
         "appinvite_service": {
-          "status": 1
+          "other_platform_oauth_client": [
+            {
+              "client_id": "795884504956-df0v0cic192q7bmcl6psipc035q89bfc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
