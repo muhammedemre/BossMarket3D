@@ -28,6 +28,12 @@ public class PlayerCurrencyOfficer : MonoBehaviour
 
     public void MoneyDepositToTheWallet(int moneyToDeposit)
     {
+        if (LevelManager.instance.levelPowerUpOfficer.coinBoostActive)
+        {
+            float boostCoefficient = LevelManager.instance.levelPowerUpOfficer.coinBoostCoefficient;
+            moneyToDeposit = (int)(moneyToDeposit*boostCoefficient);
+        }
+        
         Money += moneyToDeposit;
     }
 

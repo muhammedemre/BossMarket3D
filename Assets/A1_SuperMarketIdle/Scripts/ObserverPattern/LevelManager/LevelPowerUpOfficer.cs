@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class LevelPowerUpOfficer : MonoBehaviour
 {
-    [SerializeField] bool speedUpActive = false, coinBoostActive = false;
+    public bool speedUpActive = false, coinBoostActive = false;
+    public float coinBoostCoefficient = 1, speedUpCoefficient = 1;
+
 
     public void FillTheRoomsItemStands() 
     {
@@ -12,7 +14,7 @@ public class LevelPowerUpOfficer : MonoBehaviour
     }
     public void SpeedUpTheCustomersForSomeTime(float speedBoostCoefficient, float duration) 
     {
-    
+        StartCoroutine(DeactivateSpeedUpTheCustomers(duration));
     }
 
     public void GetCoinReward(int coinAmount)
@@ -20,10 +22,24 @@ public class LevelPowerUpOfficer : MonoBehaviour
         PlayerManager.instance.playerCurrencyOfficer.MoneyDepositToTheWallet(coinAmount);
     }
 
-    public void CoinEarnBoostForSomeTime(float coinBoostCoefficient, float duration) 
+    public void CoinEarnBoostForSomeTime(float _coinBoostCoefficient, float duration) 
     {
-
+        coinBoostActive = true;
+        coinBoostCoefficient = _coinBoostCoefficient;
+        StartCoroutine(DeactivateCoinBoost(duration));
     }
 
-    
+    IEnumerator DeactivateCoinBoost(float duration) 
+    {
+        yield return new WaitForSeconds(duration);
+        coinBoostActive = false;
+        coinBoostCoefficient = 1;
+    }
+
+    IEnumerator DeactivateSpeedUpTheCustomers(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        speedUpActive = false;
+        speedUpCoefficient = 1;
+    }
 }
