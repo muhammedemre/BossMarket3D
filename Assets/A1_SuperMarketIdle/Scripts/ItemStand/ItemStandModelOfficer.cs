@@ -6,35 +6,70 @@ using Sirenix.OdinInspector;
 public class ItemStandModelOfficer : SerializedMonoBehaviour
 {
     [SerializeField] ItemStandActor itemStandActor;
-    [SerializeField] Dictionary<ItemType, Transform> itemTypeItemPositionsContainers = new Dictionary<ItemType, Transform>();
-    [SerializeField] Dictionary<ItemType, MeshRenderer> itemTypeStandModels = new Dictionary<ItemType, MeshRenderer>();
-    [SerializeField] Dictionary<ItemType, Transform> itemTypeBoards = new Dictionary<ItemType, Transform>();
-    [SerializeField] Dictionary<ItemType, Transform> itemTypeBoardIcons = new Dictionary<ItemType, Transform>();
+    [SerializeField] List<MeshRenderer> itemStandModelMeshes = new List<MeshRenderer>();
+    [SerializeField] List<GameObject> BoardList = new List<GameObject>();
+    [SerializeField] List<GameObject> itemIconList = new List<GameObject>(); // order should be same with ItemType's order
+    [SerializeField] List<Transform> itemPositionContainerList = new List<Transform>();
+    [SerializeField] List<Transform> ParticleContainerList = new List<Transform>();
+    [SerializeField] List<ItemType> itemsOnWoodenItemStand = new List<ItemType>();
+    [SerializeField] List<ItemType> itemsOnClothStand = new List<ItemType>();
+
 
     public void SelectTheModel(ItemType selectedModel)
     {
         CloseAll();
-        if (itemTypeStandModels.ContainsKey(selectedModel))
-        {
-            //modelList[(int)selectedModel].SetActive(true);
-            itemTypeStandModels[selectedModel].GetComponent<MeshRenderer>().enabled = true;
-            itemTypeBoards[selectedModel].gameObject.SetActive(true);
-            itemTypeBoardIcons[selectedModel].gameObject.SetActive(true);
-        }
+        ActivateStandModel(selectedModel);
+        ActivateItemIcon(selectedModel);
         itemStandActor.itemStandItemHandleOfficer.standsItemType = selectedModel;
-        Transform selectedItemPositions = itemTypeItemPositionsContainers[selectedModel];
-        itemStandActor.itemStandItemHandleOfficer.AssignItemPositions(selectedItemPositions);
-
     }
 
     void CloseAll()
     {
-        foreach (ItemType model in itemTypeStandModels.Keys)
+        DeActivateStandModel();
+        DeActivateItemIcon();
+    }
+
+    void ActivateStandModel(ItemType type) 
+    {
+        if (itemsOnWoodenItemStand.Contains(type))
         {
-            //model.SetActive(false);
-            itemTypeStandModels[model].GetComponent<MeshRenderer>().enabled = false;
-            itemTypeBoards[model].gameObject.SetActive(false);
-            itemTypeBoardIcons[model].gameObject.SetActive(false);
+            itemStandModelMeshes[0].enabled = true;
+            BoardList[0].SetActive(true);
+            itemStandActor.itemStandItemHandleOfficer.AssignItemPositions(itemPositionContainerList[0]);
+            itemStandActor.itemStandItemHandleOfficer.AssignParticleContainer(ParticleContainerList[0]);
+        }
+        else if (itemsOnClothStand.Contains(type))
+        {
+            itemStandModelMeshes[1].enabled = true;
+            BoardList[1].SetActive(true);
+            itemStandActor.itemStandItemHandleOfficer.AssignItemPositions(itemPositionContainerList[1]);
+            itemStandActor.itemStandItemHandleOfficer.AssignParticleContainer(ParticleContainerList[1]);
+        }
+    }
+
+    void ActivateItemIcon(ItemType type) 
+    {
+        int itemIndex = (int)type;
+        itemIconList[itemIndex].SetActive(true);
+    }
+
+    void DeActivateStandModel()
+    {
+        foreach (MeshRenderer modelMesh in itemStandModelMeshes)
+        {
+            modelMesh.enabled = false;
+        }
+        foreach (GameObject board in BoardList)
+        {
+            board.SetActive(false);
+        }
+    }
+
+    void DeActivateItemIcon()
+    {
+        foreach (GameObject iconModel in itemIconList)
+        {
+            iconModel.SetActive(false);
         }
     }
 
