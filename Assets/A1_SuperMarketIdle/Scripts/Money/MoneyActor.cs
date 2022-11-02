@@ -10,7 +10,7 @@ public class MoneyActor : MonoBehaviour
     {
         transform.position = throwStartPosition;
 
-        float normalizedThrowDuration = Random.RandomRange((throwDuration * 0.8f), (throwDuration * 1.2f));
+        float normalizedThrowDuration = Random.Range((throwDuration * 0.8f), (throwDuration * 1.2f));
 
         if (!isStackFull)
         {
@@ -20,9 +20,9 @@ public class MoneyActor : MonoBehaviour
         {
             transform.DOJump(throwEndPosition, throwJumpPower, 1, normalizedThrowDuration).OnComplete(() => AddToUsedMoneyList(listToBeAttached, isStackFull));//.OnComplete(() => PoolItself());
         }
-        
 
-        float normalizedEulerY = Random.RandomRange(throwEndEuler.y - throwEulerRandomAngle, throwEndEuler.y + throwEulerRandomAngle);
+
+        float normalizedEulerY = Random.Range(throwEndEuler.y - throwEulerRandomAngle, throwEndEuler.y + throwEulerRandomAngle);
         Vector3 normalizedEuler = new Vector3(throwEndEuler.x, normalizedEulerY, throwEndEuler.z);
         transform.DORotate(normalizedEuler, throwDuration);
     }

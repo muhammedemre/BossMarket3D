@@ -29,11 +29,11 @@ public class UpgradeButtonActor : MonoBehaviour
     private void Start()
     {
         switch (buttonType)
-        {          
+        {
             case ButtonType.PlayerUpgrade:
-                buttonFunctions += UpgradePlayer;   
+                buttonFunctions += UpgradePlayer;
                 break;
-            case ButtonType.WorkerUpgrade:    
+            case ButtonType.WorkerUpgrade:
                 buttonFunctions += UpgradeWorker;
                 break;
             case ButtonType.EnvironmentUpgrade:
@@ -45,7 +45,7 @@ public class UpgradeButtonActor : MonoBehaviour
         }
         PrepareTheButton();
     }
- 
+
     public void UpgradeButtonProcess()
     {
         buttonFunctions(buttonIndex);
@@ -64,10 +64,10 @@ public class UpgradeButtonActor : MonoBehaviour
             int newRequiredMoney = Cost();
             moneyAmountText.GetComponent<TextMeshProUGUI>().text = newRequiredMoney.ToString();
         }
-        
+
         SetButtonState(fullyUpgraded);
     }
-        
+
 
     void SetButtonLabel(int buttonLabelTextIndex)
     {
@@ -79,6 +79,11 @@ public class UpgradeButtonActor : MonoBehaviour
         if (fullyUpgraded)
         {
             FullyUpgradedProcess();
+
+            if (buttonType == ButtonType.TruckUpgrade)
+            {
+                ButtonLevelInfoText(buttonLevel);
+            }
         }
         else
         {
@@ -86,7 +91,7 @@ public class UpgradeButtonActor : MonoBehaviour
             if (buttonType == ButtonType.WorkerUpgrade)
             {
                 spriteAndLabelIndex = (buttonLevel == 0) ? 0 : 1;
-                
+
                 ButtonLevelInfoText(buttonLevel - 1);
             }
             else
@@ -122,7 +127,7 @@ public class UpgradeButtonActor : MonoBehaviour
                 // money is not enough to use the button
             }
         }
-        else if(buttonLevel == DataManager.instance.gameVariablesData.PlayerUpgradeButtonCosts.Count - 1)//Button max level
+        else if (buttonLevel == DataManager.instance.gameVariablesData.PlayerUpgradeButtonCosts.Count - 1)//Button max level
         {
             bool playerHasEnoughMoney = CheckIfPlayerHasEnoughMoney(DataManager.instance.gameVariablesData.PlayerUpgradeButtonCosts[buttonLevel]);
             if (playerHasEnoughMoney)
@@ -132,7 +137,7 @@ public class UpgradeButtonActor : MonoBehaviour
                 buttonLevel++;
                 SetButtonState(true);
             }
-            
+
         }
     }
 
@@ -164,7 +169,7 @@ public class UpgradeButtonActor : MonoBehaviour
                 upgradeWindowActor.upgradeWindowUpgradeOfficer.WorkerUpgradeButton(_buttonIndex);
                 buttonLevel++;
                 SetButtonState(true);
-            }               
+            }
         }
     }
 
@@ -197,8 +202,8 @@ public class UpgradeButtonActor : MonoBehaviour
                 buttonLevel++;
                 SetButtonState(true);
             }
-                
-        }                 
+
+        }
     }
 
     void UpgradeEnvironment(int _buttonIndex)
@@ -237,13 +242,13 @@ public class UpgradeButtonActor : MonoBehaviour
 
 
     public void UpdateTheButton(int _buttonLevel)
-    {      
+    {
         buttonLevel = _buttonLevel;
-        PrepareTheButton();      
+        PrepareTheButton();
     }
 
     void FullyUpgradedProcess()
-    {       
+    {
         moneyUI.SetActive(false);
         moneyAmountText.SetActive(false);
         upgradeButtonLabelText.SetActive(false);
@@ -266,14 +271,14 @@ public class UpgradeButtonActor : MonoBehaviour
         {
             upgradeButtonLabelText.SetActive(true);
         }
-        
+
     }
 
     int Cost()
     {
         int value = 0;
         switch (buttonType)
-        {           
+        {
             case ButtonType.PlayerUpgrade:
                 value = DataManager.instance.gameVariablesData.PlayerUpgradeButtonCosts[buttonLevel];
                 break;
