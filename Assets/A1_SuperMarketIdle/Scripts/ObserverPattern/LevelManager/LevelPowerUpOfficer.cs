@@ -15,9 +15,9 @@ public class LevelPowerUpOfficer : MonoBehaviour
     
     }
 
-    public void GetCoinReward()
+    public void GetCoinReward(int coinAmount)
     {
-
+        PlayerManager.instance.playerCurrencyOfficer.MoneyDepositToTheWallet(coinAmount);
     }
 
     public void CoinEarnBoostForSomeTime(float coinBoostCoefficient, float duration) 
