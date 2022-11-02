@@ -29,7 +29,7 @@ public class UpgradePointActor : MonoBehaviour
         {
             PlayerLevelOfficer _playerLevelOfficer = PlayerManager.instance.playerActor.playerLevelOfficer;
             int playerCapacityLevel = (_playerLevelOfficer.playerVariableLevels["Capacity"] < playerMaxLevel) ? (_playerLevelOfficer.playerVariableLevels["Capacity"] + 1) : playerMaxLevel;
-            PlayerManager.instance.CapacityLevel = playerCapacityLevel; 
+            PlayerManager.instance.CapacityLevel = playerCapacityLevel;
             //_playerLevelOfficer.ApplyPlayerUpgrade("Capacity", playerCapacityLevel);
             return true;
         }
@@ -46,7 +46,7 @@ public class UpgradePointActor : MonoBehaviour
 
     public bool UpgradeTheWorker(int workerId)
     {
-        int workerMaxLevel = DataManager.instance.gameVariablesData.WorkerUpgradeButtonCosts.Count+1;
+        int workerMaxLevel = DataManager.instance.gameVariablesData.WorkerUpgradeButtonCosts.Count + 1;
         if (roomDataOfficer.workerLevels[workerId] < workerMaxLevel)
         {
             if (roomDataOfficer.workerLevels[workerId] == -1)

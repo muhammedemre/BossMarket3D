@@ -4,10 +4,10 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 
 public class TruckHandleOfficer : MonoBehaviour
-{   
+{
     [SerializeField] DepotTruckPointActor depotTruckPointActor;
     public TruckActor truck;
-    Dictionary<string, int> truckVariableLevels = new Dictionary<string, int>() { {"Capacity", 0}, { "Speed", 0 } };
+    Dictionary<string, int> truckVariableLevels = new Dictionary<string, int>() { { "Capacity", 0 }, { "Speed", 0 } };
 
     [SerializeField] float truckIdleCheckFrequency;
     float nextTruckIdleCheck = 0f;
@@ -23,7 +23,7 @@ public class TruckHandleOfficer : MonoBehaviour
         truck.truckMoveOfficer.CallTheTruck();
     }
     public void SendTheTruck()
-    {       
+    {
         truck.truckMoveOfficer.SendTheTruck();
     }
 

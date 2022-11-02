@@ -49,13 +49,13 @@ public class MoneyStackOfficer : MonoBehaviour
         moneyUIPool.name = "MoneyUIPool_" + this.name;
 
         int moneyUICounter = 0;
-        for (int i = 0; i < pooledMoneyList.Count*2; i++)
+        for (int i = 0; i < pooledMoneyList.Count * 2; i++)
         {
             Transform tempUIMoney = Instantiate(moneyUIPrefab, moneyUIPool.position, Quaternion.identity, moneyUIPool);
             tempUIMoney.GetComponent<MoneyUIActor>().relatedMoneyStackOfficer = this;
             tempUIMoney.gameObject.SetActive(false);
             tempUIMoney.name = "MoneyUI_" + moneyUICounter.ToString();
-            
+
             pooledMoneyUIList.Add(tempUIMoney);
             moneyUICounter++;
         }
@@ -104,16 +104,16 @@ public class MoneyStackOfficer : MonoBehaviour
             thrownMoneyCounter = 0;
             moneyCollectIsBusy = false;
         }
-        
+
     }
 
 
     void CleanTheTable()
-    {      
+    {
         for (int i = 0; i < usedMoneyList.Count; i++)
         {
             usedMoneyList[i].GetComponent<MoneyActor>().PoolItself();
-        }       
+        }
     }
 
     void ConvertMoneyToMoneyUI(int moneyIndex)
@@ -131,20 +131,21 @@ public class MoneyStackOfficer : MonoBehaviour
         if (usedMoneyList.Count > 0)
         {
             usedMoneyList[0].GetComponent<MoneyActor>().PoolItself();
-        }      
+        }
     }
 
     Vector3 CalculateTheMoneyUIImageAnchoredPosition()
     {
         RectTransform moneyUIImage = UIManager.instance.InGameMoneyImage.GetComponent<RectTransform>();
+        return moneyUIImage.position;
 
-        float width = Screen.width;
-        float height = Screen.height;
+        // float width = Screen.width;
+        // float height = Screen.height;
 
-        float moneyUIXMiddlePosRate = moneyUIImage.anchorMin.x + ((moneyUIImage.anchorMax.x - moneyUIImage.anchorMin.x)/2) - 0.5f;
-        float moneyUIYMiddlePosRate = moneyUIImage.anchorMin.y + ((moneyUIImage.anchorMax.y - moneyUIImage.anchorMin.y)/2 )- 0.5f;
-        Vector2 moneyUIPos = new Vector3(width * moneyUIXMiddlePosRate, height * moneyUIYMiddlePosRate, 0f);
-        return moneyUIPos;
+        // float moneyUIXMiddlePosRate = moneyUIImage.anchorMin.x + ((moneyUIImage.anchorMax.x - moneyUIImage.anchorMin.x)/2) - 0.5f;
+        // float moneyUIYMiddlePosRate = moneyUIImage.anchorMin.y + ((moneyUIImage.anchorMax.y - moneyUIImage.anchorMin.y)/2 )- 0.5f;
+        // Vector2 moneyUIPos = new Vector3(width * moneyUIXMiddlePosRate, height * moneyUIYMiddlePosRate, 0f);
+        // return moneyUIPos;
     }
 
     Vector2 WorldToScreenConverter(Transform target)
@@ -179,7 +180,7 @@ public class MoneyStackOfficer : MonoBehaviour
     [Button("Add Money", ButtonSizes.Large)]
     void ButtonAddMoney()
     {
-        StartCoroutine(ThrowMoney(3, testThrowPosition.position, 0.05f));      
+        StartCoroutine(ThrowMoney(3, testThrowPosition.position, 0.05f));
     }
     #endregion
 }

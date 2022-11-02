@@ -22,11 +22,11 @@ public class ItemMoveOfficer : MonoBehaviour
     public void ItemTravelToTheItemTakePoint(Vector3 travelEndPosition, Vector3 travelEndEuler, float travelEulerRandomAngle, float travelDuration, float travelJumpPower)
     {
 
-        float normalizedThrowDuration = Random.RandomRange((travelDuration * 0.8f), (travelDuration * 1.2f));
+        float normalizedThrowDuration = Random.Range((travelDuration * 0.8f), (travelDuration * 1.2f));
         transform.DOJump(travelEndPosition, travelJumpPower, 1, normalizedThrowDuration);
-        
 
-        float normalizedEulerY = Random.RandomRange(travelEndEuler.y - travelEulerRandomAngle, travelEndEuler.y + travelEulerRandomAngle);
+
+        float normalizedEulerY = Random.Range(travelEndEuler.y - travelEulerRandomAngle, travelEndEuler.y + travelEulerRandomAngle);
         Vector3 normalizedEuler = new Vector3(travelEndEuler.x, normalizedEulerY, travelEndEuler.z);
         transform.DORotate(normalizedEuler, travelDuration);
     }
@@ -67,18 +67,18 @@ public class ItemMoveOfficer : MonoBehaviour
 
     public void ItemGoStand(Transform standPosition, ParticleSystem particle)
     {
-        transform.DOMove(standPosition.position, goStandDuration).OnComplete(()=> particle.Play());
+        transform.DOMove(standPosition.position, goStandDuration).OnComplete(() => particle.Play());
         transform.DORotate(standPosition.eulerAngles, goStandDuration);
         //transform.DORotate(new Vector3(-13.5f, 0, 0f), goStandDuration);
     }
     public void ItemGoShoppingBag(Transform bagPosition)
     {
-        transform.DOMove(bagPosition.position, goStandDuration).OnComplete(()=> PoolItself());
+        transform.DOMove(bagPosition.position, goStandDuration).OnComplete(() => PoolItself());
     }
 
     void CheckIfReachedItemStackPos()
-    {      
-        if ( itemStackReachTreshold > Vector3.Distance(transform.position, stackTarget.position) && !reachedTheStack && onPlayer)
+    {
+        if (itemStackReachTreshold > Vector3.Distance(transform.position, stackTarget.position) && !reachedTheStack && onPlayer)
         {
             Debug.Log("CheckIfReachedItemStackPos");
             reachedTheStack = true;
