@@ -972,6 +972,10 @@ PrefabInstance:
       propertyPath: totalInvestmentRequired
       value: 250
       objectReference: {fileID: 0}
+    - target: {fileID: 9109342736759957023, guid: 40456008fe7d34dc1ae6262750ffeb0f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -20
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 40456008fe7d34dc1ae6262750ffeb0f, type: 3}
 --- !u!1 &6975127531288028374 stripped
