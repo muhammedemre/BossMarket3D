@@ -9,11 +9,12 @@ public class GameManager : SerializedMonoBehaviour
     public GameManagerObserverOfficer gameManagerObserverOfficer;
     [SerializeField] private float preGameStartDelay;
     public GameStates currentGameState = GameStates.Menu;
+    public bool isTest = false;
 
     private void Awake()
     {
         StaticCheck();
-        
+
         gameManagerObserverOfficer.CreateSubjects();
         StartCoroutine(PreGameStartDelay());
     }
@@ -23,7 +24,7 @@ public class GameManager : SerializedMonoBehaviour
         yield return new WaitForSeconds(preGameStartDelay);
         gameManagerObserverOfficer.Publish(ObserverSubjects.PreGameStart);
     }
-    
+
 
     void StaticCheck()
     {
@@ -34,5 +35,5 @@ public class GameManager : SerializedMonoBehaviour
 
         instance = this;
     }
-    
+
 }

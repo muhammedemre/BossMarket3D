@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using MyGoogleAdMob;
 using GoogleMobileAds.Api;
+using UnityEngine.Events;
 
 public class AdsLoadAndShowOfficer : MonoBehaviour
 {
@@ -36,11 +37,13 @@ public class AdsLoadAndShowOfficer : MonoBehaviour
         string unitId = "unexpected_platform";
         if (Application.platform == RuntimePlatform.Android)
         {
-            unitId = type.androidUnitID;
+            if (GameManager.instance.isTest) unitId = googleAdMobAdsDataOfficer.Ads[AdPlacement.Test].androidUnitID;
+            else unitId = type.androidUnitID;
         }
         else if (Application.platform == RuntimePlatform.IPhonePlayer)
         {
-            unitId = type.iosUnitID;
+            if (GameManager.instance.isTest) unitId = googleAdMobAdsDataOfficer.Ads[AdPlacement.Test].iosUnitID;
+            else unitId = type.iosUnitID;
         }
 
         if (!RewardedAds.ContainsKey(placement))
@@ -54,7 +57,8 @@ public class AdsLoadAndShowOfficer : MonoBehaviour
         RewardedAds[placement].OnAdFailedToLoad += (_, error) => Debug.LogError(error.LoadAdError.GetMessage());
     }
 
-    public void ShowRewardedAd(AdPlacement placement)
+    /// <param name="onRewarded">Returns the reward amount</param>
+    public void ShowRewardedAd(AdPlacement placement, UnityAction<double> onRewarded)
     {
         if (!RewardedAds.ContainsKey(placement))
         {
@@ -65,6 +69,7 @@ public class AdsLoadAndShowOfficer : MonoBehaviour
         {
             RewardedAds[placement].Show();
             LoadRewardedAd(placement, googleAdMobAdsDataOfficer.Ads[placement]);
+            RewardedAds[placement].OnUserEarnedReward += (sender, args) => onRewarded?.Invoke(args.Amount);
         }
     }
 }

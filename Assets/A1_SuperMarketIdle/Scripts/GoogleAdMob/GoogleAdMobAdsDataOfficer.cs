@@ -21,5 +21,5 @@ namespace MyGoogleAdMob
     }
 
     public enum AdFormat { Rewarded }
-    public enum AdPlacement { Test }
+    public enum AdPlacement { Test, CoinsBoost, Revenue2x }
 }
