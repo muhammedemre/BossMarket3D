@@ -9,9 +9,9 @@ public class PowerBoostModelOfficer : MonoBehaviour
 
     [SerializeField] List<GameObject> modelList = new List<GameObject>();
 
-    public enum PowerBoostType 
+    public enum PowerBoostType
     {
-        GiftBox, Case, MoneyCase
+        GiftBox, Case
     }
 
     private void Awake()

@@ -14,7 +14,19 @@ public class PlayerInteractionOfficer : MonoBehaviour
             {
                 other.GetComponent<RootFinderOfficer>().root.GetComponent<CashierActor>().moneyHandleOfficer.audioSource.Play();
             }
-            
+        }
+        else if (other.CompareTag("PowerBoostBox"))
+        {
+            PowerBoostModelOfficer.PowerBoostType powerBoostType = other.GetComponent<RootFinderOfficer>().root.GetComponent<PowerBoostBoxActor>().selectedBoostType;
+
+            if (powerBoostType == PowerBoostModelOfficer.PowerBoostType.GiftBox)
+            {
+                Debug.Log("GiftBox Intercation");
+            }
+            else if (powerBoostType == PowerBoostModelOfficer.PowerBoostType.Case)
+            {
+                Debug.Log("Case Intercation");
+            }
         }
     }
 
