@@ -7,6 +7,11 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: MAT_Environment03
+    second: {fileID: 2100000, guid: 43d2e83ae47758443bd867bb266a7812, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: MAT_Environment04
     second: {fileID: 2100000, guid: 43d2e83ae47758443bd867bb266a7812, type: 2}
   materials:
