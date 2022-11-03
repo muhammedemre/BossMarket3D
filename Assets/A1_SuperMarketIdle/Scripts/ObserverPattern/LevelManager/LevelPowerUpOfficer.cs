@@ -29,6 +29,12 @@ public class LevelPowerUpOfficer : MonoBehaviour
         }
 
     }
+
+    public void SpeedUp2xTheCustomersForSomeTime(float seconds)
+    {
+        SpeedUpTheCustomersForSomeTime(2, seconds);
+    }
+
     public void SpeedUpTheCustomersForSomeTime(float speedBoostCoefficient, float duration)
     {
         ChangeTheSpeedOfCustomers(true, speedBoostCoefficient);
@@ -38,6 +44,11 @@ public class LevelPowerUpOfficer : MonoBehaviour
     public void GetCoinReward(int coinAmount)
     {
         PlayerManager.instance.playerCurrencyOfficer.MoneyDepositToTheWallet(coinAmount);
+    }
+
+    public void Coin2XBoostForSomeTime(float seconds)
+    {
+        CoinEarnBoostForSomeTime(2, seconds);
     }
 
     public void CoinEarnBoostForSomeTime(float _coinBoostCoefficient, float duration)
@@ -122,11 +133,15 @@ public class LevelPowerUpOfficer : MonoBehaviour
         }
     }
 
-    public void ActivateCashier() 
+    public void ActivateCashier()
     {
         RoomActor theRoomPlayerIsIn = LevelManager.instance.levelCreateOfficer.currentLevel.GetComponent<LevelActor>().levelRoomOfficer.FindTheRoomThatPlayerIn();
         theRoomPlayerIsIn.roomFixturesOfficer.roomCashier.GetComponent<CashierActor>().CashierWorkerActivate(cashierLiveDuration);
+    }
 
+    public void RandomlyUpgradeAdsWindow()
+    {
+        UIManager.instance.upgradeAdsWindowActor.RandomOpenUpgradeAdsWindow();
     }
 
 
@@ -150,6 +165,18 @@ public class LevelPowerUpOfficer : MonoBehaviour
     void ButtonRandomlyPlaceAPowerBoostBox()
     {
         RandomlyPlaceAPowerBoostBox();
+    }
+
+    [Title("RandomlyUpgradeAdsWindow")]
+    [Button("RandomlyUpgradeAdsWindow", ButtonSizes.Large)]
+    void ButtonRandomlyUpgradeAdsWindow()
+    {
+        if (!Application.isPlaying)
+        {
+            Debug.Log("Only playing!");
+            return;
+        }
+        RandomlyUpgradeAdsWindow();
     }
     #endregion
 }

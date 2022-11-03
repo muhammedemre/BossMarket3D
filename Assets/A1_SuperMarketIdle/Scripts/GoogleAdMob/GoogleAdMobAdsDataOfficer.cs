@@ -31,6 +31,7 @@ namespace MyGoogleAdMob
         RoomAdd,
         SpeedUpCustomer,
         ReFillTheRoomRW,
-        WorkerUpgrade
+        WorkerUpgrade,
+        Cashier
     }
 }
