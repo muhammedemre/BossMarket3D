@@ -6,7 +6,7 @@ using UnityEngine;
 public class LevelPowerUpOfficer : MonoBehaviour
 {
     public bool speedUpActive = false, coinBoostActive = false;
-    public float coinBoostCoefficient = 1, speedUpCoefficient = 1, coinRewardProcent;
+    public float coinBoostCoefficient = 1, speedUpCoefficient = 1, coinRewardProcent, cashierLiveDuration;
     float normalCustomerSpeed;
     [SerializeField] GameObject powerBoostBoxPrefab;
 
@@ -120,6 +120,13 @@ public class LevelPowerUpOfficer : MonoBehaviour
             nextPowerBoostBoxAdditionTime = Time.time + powerBoostBoxFrequency;
             RandomlyPlaceAPowerBoostBox();
         }
+    }
+
+    public void ActivateCashier() 
+    {
+        RoomActor theRoomPlayerIsIn = LevelManager.instance.levelCreateOfficer.currentLevel.GetComponent<LevelActor>().levelRoomOfficer.FindTheRoomThatPlayerIn();
+        theRoomPlayerIsIn.roomFixturesOfficer.roomCashier.GetComponent<CashierActor>().CashierWorkerActivate(cashierLiveDuration);
+
     }
 
 

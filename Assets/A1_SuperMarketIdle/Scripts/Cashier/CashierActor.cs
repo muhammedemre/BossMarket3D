@@ -12,10 +12,10 @@ public class CashierActor : MonoBehaviour
 
     [SerializeField] CashierWorkerActor cashierWorkerActor;
 
-    public void CashierWorkerActivate()
+    public void CashierWorkerActivate(float liveDuration)
     {
         cashierWorkerActor.gameObject.SetActive(true);
-        cashierWorkerActor.StartProcess();
+        cashierWorkerActor.StartProcess(liveDuration);
     }
 
     #region Button
@@ -24,7 +24,7 @@ public class CashierActor : MonoBehaviour
     [Button("Activate The Cashier Worker", ButtonSizes.Large)]
     void ButtonActivateTheCashierWorker()
     {
-        CashierWorkerActivate();
+        CashierWorkerActivate(5);
     }
     #endregion
 }

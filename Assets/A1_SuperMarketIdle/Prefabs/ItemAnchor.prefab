@@ -188,7 +188,7 @@ MonoBehaviour:
   - {fileID: 5391662512478656465}
   - {fileID: 1554404239874843490}
   - {fileID: 7001267764617879508}
-  selectedType: 1
+  selectedType: 4
 --- !u!82 &95625878541198283
 AudioSource:
   m_ObjectHideFlags: 0
@@ -842,7 +842,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6876790906614960763, guid: 1e3599dc6c9df9b4594de732a0541a63, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1e3599dc6c9df9b4594de732a0541a63, type: 3}
@@ -996,7 +996,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 2956c26bdb301144087d8b3633c9b590, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2956c26bdb301144087d8b3633c9b590, type: 3}

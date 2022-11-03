@@ -8,8 +8,9 @@ public class CashierWorkerActor : MonoBehaviour
     [SerializeField] float liveDuration;
     float deathTime;
 
-    public void StartProcess()
+    public void StartProcess(float _liveDuration)
     {
+        liveDuration = _liveDuration;
         particle.Play();
         deathTime = Time.time + liveDuration;
     }
