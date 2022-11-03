@@ -8,7 +8,7 @@ using TMPro;
 public class UpgradeButtonActor : MonoBehaviour
 {
     [SerializeField] UpgradeWindowActor upgradeWindowActor;
-    [SerializeField] GameObject moneyAmountText, upgradeButtonLabelText, moneyLabel, moneyUI, buttonLevelText, upgradeCompleteText;
+    [SerializeField] GameObject moneyAmountText, upgradeButtonLabelText, moneyLabel, moneyUI, buttonLevelText, upgradeLevel0, upgradeComplete, upgradeOtherLevels;
     [SerializeField] List<Sprite> buttonBGSpriteList = new List<Sprite>();
     [SerializeField] List<string> buttonLabelTextList = new List<string>();
     [SerializeField] ButtonType buttonType;
@@ -146,18 +146,25 @@ public class UpgradeButtonActor : MonoBehaviour
         bool successFullButtonPush = buttonLevel < DataManager.instance.gameVariablesData.WorkerUpgradeButtonCosts.Count - 1;
         if (successFullButtonPush)
         {
-            bool playerHasEnoughMoney = CheckIfPlayerHasEnoughMoney(DataManager.instance.gameVariablesData.WorkerUpgradeButtonCosts[buttonLevel]);
-            if (playerHasEnoughMoney)
+            if (buttonLevel == 0)
             {
-                PlayerManager.instance.playerCurrencyOfficer.Money -= DataManager.instance.gameVariablesData.WorkerUpgradeButtonCosts[buttonLevel];
-                upgradeWindowActor.upgradeWindowUpgradeOfficer.WorkerUpgradeButton(_buttonIndex);
-                buttonLevel++;
-                int newCost = DataManager.instance.gameVariablesData.WorkerUpgradeButtonCosts[buttonLevel];
-                PrepareTheButton();
+                bool playerHasEnoughMoney = CheckIfPlayerHasEnoughMoney(DataManager.instance.gameVariablesData.WorkerUpgradeButtonCosts[buttonLevel]);
+                if (playerHasEnoughMoney)
+                {
+                    PlayerManager.instance.playerCurrencyOfficer.Money -= DataManager.instance.gameVariablesData.WorkerUpgradeButtonCosts[buttonLevel];
+                    UpgradeWorkerSuccess(_buttonIndex);
+                }
+                else
+                {
+                    // money is not enough to use the button
+                }
             }
             else
             {
-                // money is not enough to use the button
+                AdsManager.instance.adsActor.adsShowOfficer.ShowRewardedAd(MyGoogleAdMob.AdPlacement.WorkerUpgrade, (_) =>
+                {
+                    UpgradeWorkerSuccess(_buttonIndex);
+                });
             }
         }
         else if (buttonLevel == DataManager.instance.gameVariablesData.PlayerUpgradeButtonCosts.Count - 1)//Button max level
@@ -171,6 +178,14 @@ public class UpgradeButtonActor : MonoBehaviour
                 SetButtonState(true);
             }
         }
+    }
+
+    void UpgradeWorkerSuccess(int _buttonIndex)
+    {
+        upgradeWindowActor.upgradeWindowUpgradeOfficer.WorkerUpgradeButton(_buttonIndex);
+        buttonLevel++;
+        int newCost = DataManager.instance.gameVariablesData.WorkerUpgradeButtonCosts[buttonLevel];
+        PrepareTheButton();
     }
 
     void UpgradeTruck(int _buttonIndex)
@@ -252,7 +267,9 @@ public class UpgradeButtonActor : MonoBehaviour
         moneyUI.SetActive(false);
         moneyAmountText.SetActive(false);
         upgradeButtonLabelText.SetActive(false);
-        upgradeCompleteText.SetActive(true);
+        upgradeLevel0.SetActive(false);
+        upgradeOtherLevels.SetActive(false);
+        upgradeComplete.SetActive(true);
         Sprite selectedSprite = buttonBGSpriteList[2];
         moneyLabel.GetComponent<Image>().sprite = selectedSprite;
         button.interactable = false;
@@ -263,7 +280,16 @@ public class UpgradeButtonActor : MonoBehaviour
         Sprite selectedSprite = buttonBGSpriteList[spriteAndLabelIndex];
         moneyLabel.GetComponent<Image>().sprite = selectedSprite;
         button.interactable = true;
-        upgradeCompleteText.SetActive(false);
+        if (buttonType == ButtonType.WorkerUpgrade)
+        {
+            upgradeLevel0.SetActive(buttonLevel == 0);
+            upgradeOtherLevels.SetActive(buttonLevel != 0);
+        }
+        else
+        {
+            upgradeLevel0.SetActive(true);
+        }
+        upgradeComplete.SetActive(false);
         SetButtonLabel(spriteAndLabelIndex);
         moneyUI.SetActive(true);
         moneyAmountText.SetActive(true);
