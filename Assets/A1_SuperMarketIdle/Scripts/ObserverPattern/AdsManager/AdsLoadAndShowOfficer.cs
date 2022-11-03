@@ -10,6 +10,7 @@ public class AdsLoadAndShowOfficer : MonoBehaviour
     public GoogleAdMobInit googleAdMobInit;
     public GoogleAdMobAdsDataOfficer googleAdMobAdsDataOfficer;
     public Dictionary<AdPlacement, RewardedAd> RewardedAds { get; private set; } = new Dictionary<AdPlacement, RewardedAd>();
+    public Dictionary<AdPlacement, InterstitialAd> InterstitialAds { get; private set; } = new Dictionary<AdPlacement, InterstitialAd>();
 
     private void OnEnable()
     {
@@ -29,6 +30,10 @@ public class AdsLoadAndShowOfficer : MonoBehaviour
             {
                 LoadRewardedAd(ad.Key, ad.Value);
             }
+            else if (ad.Value.adFormat == AdFormat.Interstitial)
+            {
+                LoadInterstitialAd(ad.Key, ad.Value);
+            }
         }
     }
 
@@ -37,12 +42,12 @@ public class AdsLoadAndShowOfficer : MonoBehaviour
         string unitId = "unexpected_platform";
         if (Application.platform == RuntimePlatform.Android)
         {
-            if (GameManager.instance.isTest) unitId = googleAdMobAdsDataOfficer.Ads[AdPlacement.Test].androidUnitID;
+            if (GameManager.instance.isTest) unitId = googleAdMobAdsDataOfficer.Ads[AdPlacement.TestRewarded].androidUnitID;
             else unitId = type.androidUnitID;
         }
         else if (Application.platform == RuntimePlatform.IPhonePlayer)
         {
-            if (GameManager.instance.isTest) unitId = googleAdMobAdsDataOfficer.Ads[AdPlacement.Test].iosUnitID;
+            if (GameManager.instance.isTest) unitId = googleAdMobAdsDataOfficer.Ads[AdPlacement.TestRewarded].iosUnitID;
             else unitId = type.iosUnitID;
         }
 
@@ -55,6 +60,26 @@ public class AdsLoadAndShowOfficer : MonoBehaviour
         RewardedAds[placement].LoadAd(request);
         RewardedAds[placement].OnAdLoaded += (_, __) => googleAdMobAdsDataOfficer.Ads[placement].isLoaded = true;
         RewardedAds[placement].OnAdFailedToLoad += (_, error) => Debug.LogError(error.LoadAdError.GetMessage());
+    }
+
+    private void LoadInterstitialAd(AdPlacement placement, GoogleAdMobType type)
+    {
+        string unitId = "unexpected_platform";
+        if (Application.platform == RuntimePlatform.Android)
+        {
+            if (GameManager.instance.isTest) unitId = googleAdMobAdsDataOfficer.Ads[AdPlacement.TestInterstitial].androidUnitID;
+            else unitId = type.androidUnitID;
+        }
+        else if (Application.platform == RuntimePlatform.IPhonePlayer)
+        {
+            if (GameManager.instance.isTest) unitId = googleAdMobAdsDataOfficer.Ads[AdPlacement.TestInterstitial].iosUnitID;
+            else unitId = type.iosUnitID;
+        }
+
+        if (!InterstitialAds.ContainsKey(placement))
+        {
+            InterstitialAds.Add(placement, new InterstitialAd(unitId));
+        }
     }
 
     /// <param name="onRewarded">Returns the reward amount</param>
@@ -70,6 +95,21 @@ public class AdsLoadAndShowOfficer : MonoBehaviour
             RewardedAds[placement].Show();
             LoadRewardedAd(placement, googleAdMobAdsDataOfficer.Ads[placement]);
             RewardedAds[placement].OnUserEarnedReward += (sender, args) => onRewarded?.Invoke(args.Amount);
+        }
+    }
+
+    public void ShowInterstitialAd(AdPlacement placement, UnityAction onClosed = null)
+    {
+        if (!InterstitialAds.ContainsKey(placement))
+        {
+            Debug.Log($"Not found '{placement.ToString()}' ad");
+            return;
+        }
+        if (InterstitialAds[placement].IsLoaded())
+        {
+            InterstitialAds[placement].Show();
+            LoadInterstitialAd(placement, googleAdMobAdsDataOfficer.Ads[placement]);
+            InterstitialAds[placement].OnAdClosed += (sender, args) => onClosed?.Invoke();
         }
     }
 }

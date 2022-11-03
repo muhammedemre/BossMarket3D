@@ -21,15 +21,11 @@ public class PlayerInteractionOfficer : MonoBehaviour
 
             if (powerBoostType == PowerBoostModelOfficer.PowerBoostType.GiftBox)
             {
-
+                Debug.Log("GiftBox Intercation");
             }
             else if (powerBoostType == PowerBoostModelOfficer.PowerBoostType.Case)
             {
-
-            }
-            else if (powerBoostType == PowerBoostModelOfficer.PowerBoostType.MoneyCase)
-            {
-
+                Debug.Log("Case Intercation");
             }
         }
     }

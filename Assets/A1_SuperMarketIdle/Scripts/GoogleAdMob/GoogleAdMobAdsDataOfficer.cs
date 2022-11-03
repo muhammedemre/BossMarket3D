@@ -20,6 +20,17 @@ namespace MyGoogleAdMob
         [ReadOnly] public bool isLoaded = false;
     }
 
-    public enum AdFormat { Rewarded }
-    public enum AdPlacement { Test, CoinsBoost, Revenue2x }
+    public enum AdFormat { Rewarded, Interstitial }
+    public enum AdPlacement
+    {
+        TestRewarded,
+        TestInterstitial,
+        CoinsBoostForSomeTimeRW,
+        CoinRewardRW,
+        RoomExtend,
+        RoomAdd,
+        SpeedUpCustomer,
+        ReFillTheRoomRW,
+        WorkerUpgrade
+    }
 }
