@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class CustomerMoveOfficer : MonoBehaviour
 {
     [SerializeField] CustomerActor customerActor;
-    [SerializeField] NavMeshAgent customer;
+    public NavMeshAgent customer;
     [SerializeField] Vector3 movePosition;
     Transform lookAtTransfrom;
     [SerializeField] bool move = false, facing = false;
@@ -70,5 +70,10 @@ public class CustomerMoveOfficer : MonoBehaviour
                 customerActor.customerAIOfficer.ReachedTheTarget();
             }
         }
+    }
+
+    public void SetTheCustomerSpeed(float speed) 
+    {
+        customer.speed = speed;
     }
 }

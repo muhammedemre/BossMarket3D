@@ -44,7 +44,7 @@ public class ItemStandActor : MonoBehaviour
     {
         if (belongingRoom.roomDataOfficer.roomActiveItemStands.ContainsKey(itemStandIndexForTheRoom))
         {
-            itemStandItemHandleOfficer.AddItemsToStandFromDataLoad();
+            itemStandItemHandleOfficer.AddItemsToStandFromScript(belongingRoom.roomDataOfficer.roomActiveItemStands[itemStandIndexForTheRoom]);
             if (Time.time < 5f)
             {
                 itemStandSolidMaker.MakeSolid();

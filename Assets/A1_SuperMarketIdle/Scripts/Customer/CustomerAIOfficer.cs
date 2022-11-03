@@ -44,6 +44,7 @@ public class CustomerAIOfficer : MonoBehaviour
         }
         else if (currentState == CustomerState.Leave)
         {
+            LevelManager.instance.levelCreateOfficer.currentLevel.GetComponent<LevelActor>().levelRoomOfficer.RemoveCustomer(customerActor);
             Destroy(gameObject, 0.2f);
         }
     }

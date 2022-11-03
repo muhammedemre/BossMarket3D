@@ -71,7 +71,8 @@ public class DataSaveAndLoadOfficer : MonoBehaviour
         //print("UnpackTheDataPackage()2");
         PlayerManager.instance.CapacityLevel = ES3.Load("playerCapacityLevel", 0);
         PlayerManager.instance.SpeedLevel = ES3.Load("playerSpeedLevel", 0);
-        PlayerManager.instance.playerCurrencyOfficer.Money = ES3.Load("playerMoney", 0);
+        //PlayerManager.instance.playerCurrencyOfficer.Money = ES3.Load("playerMoney", 0);
+        PlayerManager.instance.playerCurrencyOfficer.GetMoneyDataFromDataManager(ES3.Load("playerMoney", -1)); // -1 is triggering the moneyAtStart addition
         DataManager.instance.tutorialFinished = ES3.Load("tutorialFinished", false);
         UIManager.instance.settingsMenuActor.musicState = ES3.Load("musicGame", true);
         UIManager.instance.settingsMenuActor.soundState = ES3.Load("soundGame", true);

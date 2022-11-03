@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,14 +7,22 @@ public class LevelPowerUpOfficer : MonoBehaviour
 {
     public bool speedUpActive = false, coinBoostActive = false;
     public float coinBoostCoefficient = 1, speedUpCoefficient = 1;
-
+    float normalCustomerSpeed;
 
     public void FillTheRoomsItemStands() 
     {
-    
+        RoomActor theRoomPlayerIsIn = LevelManager.instance.levelCreateOfficer.currentLevel.GetComponent<LevelActor>().levelRoomOfficer.FindTheRoomThatPlayerIn();
+        foreach (Transform itemStand in theRoomPlayerIsIn.roomFixturesOfficer.roomItemStands)
+        {
+            ItemStandActor itemStandActor= itemStand.GetComponent<ItemStandActor>();
+            int neededAmountToGetfull = itemStandActor.itemStandItemHandleOfficer.capacity - itemStandActor.itemStandItemHandleOfficer.storageList.Count;
+            itemStandActor.itemStandItemHandleOfficer.AddItemsToStandFromScript(neededAmountToGetfull);
+        }
+        
     }
     public void SpeedUpTheCustomersForSomeTime(float speedBoostCoefficient, float duration) 
     {
+        ChangeTheSpeedOfCustomers(true, speedBoostCoefficient);
         StartCoroutine(DeactivateSpeedUpTheCustomers(duration));
     }
 
@@ -40,6 +49,45 @@ public class LevelPowerUpOfficer : MonoBehaviour
     {
         yield return new WaitForSeconds(duration);
         speedUpActive = false;
-        speedUpCoefficient = 1;
+        ChangeTheSpeedOfCustomers(false, 1);
     }
+
+    void ChangeTheSpeedOfCustomers(bool boost, float speedCoefficient) 
+    {
+        if (boost)
+        {
+            foreach (CustomerActor customer in LevelManager.instance.levelCreateOfficer.currentLevel.GetComponent<LevelActor>().levelRoomOfficer.activeCustomersInLevel)
+            {
+                normalCustomerSpeed = customer.customerMoveOfficer.customer.speed;
+                float boostedSpeed = normalCustomerSpeed * speedCoefficient;
+                customer.customerMoveOfficer.SetTheCustomerSpeed(boostedSpeed);
+            }
+        }
+        else
+        {
+            foreach (CustomerActor customer in LevelManager.instance.levelCreateOfficer.currentLevel.GetComponent<LevelActor>().levelRoomOfficer.activeCustomersInLevel)
+            {
+                float boostedSpeed = normalCustomerSpeed * speedCoefficient;
+                customer.customerMoveOfficer.SetTheCustomerSpeed(boostedSpeed);
+            }
+        }
+        
+    }
+
+
+    #region Button
+
+    [Title("SpeedUpButton")]
+    [Button("SpeedUpButton", ButtonSizes.Large)]
+    void ButtonSpeedUp()
+    {
+        SpeedUpTheCustomersForSomeTime(3, 5);
+    }
+    [Title("FillTheRoomsItemStands")]
+    [Button("FillTheRoomsItemStands", ButtonSizes.Large)]
+    void ButtonFillTheRoomsItemStands()
+    {
+        FillTheRoomsItemStands();
+    }
+    #endregion
 }

@@ -67,9 +67,10 @@ public class ItemStandItemHandleOfficer : MonoBehaviour
         boardIcons.GetChild(selectedIconIndex).gameObject.SetActive(true);
     }
 
-    public void AddItemsToStandFromDataLoad()
+    public void AddItemsToStandFromScript(int addAmount)
     {
-        int amountOfItemsToCreate = itemStandActor.belongingRoom.roomDataOfficer.roomActiveItemStands[itemStandActor.itemStandIndexForTheRoom];
+        //int amountOfItemsToCreate = itemStandActor.belongingRoom.roomDataOfficer.roomActiveItemStands[itemStandActor.itemStandIndexForTheRoom];
+        int amountOfItemsToCreate = addAmount;
         List <Transform> itemToPlaceList = itemStandActor.belongingRoom.roomFixturesOfficer.depotTruckPoint.GetComponent<DepotTruckPointActor>().wareHouseOfficer.GetItemsFromThePool(amountOfItemsToCreate);
         for (int i = 0; i < amountOfItemsToCreate; i++)
         {
@@ -81,6 +82,7 @@ public class ItemStandItemHandleOfficer : MonoBehaviour
             Transform standPosition = itemPositions.GetChild(index);
             item.SetParent(standPosition);
             ParticleSystem particle = particles.GetChild(index).GetComponent<ParticleSystem>();
+            particle.Play();
             item.position = standPosition.position;
             item.eulerAngles = standPosition.eulerAngles;
         }

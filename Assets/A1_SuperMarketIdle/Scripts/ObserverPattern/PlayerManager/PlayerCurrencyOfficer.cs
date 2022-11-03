@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class PlayerCurrencyOfficer : MonoBehaviour
 {
-    [SerializeField] int money = 0;
-    [SerializeField] int testMoneyStartData; // remove this when datamanager is ready.
-    [SerializeField] bool testData = true;
+    [SerializeField] int money = -1;
+    [SerializeField] int moneyAtStart;
     [SerializeField] AudioClip moneyAudioClip;
  
     public int Money
@@ -37,16 +36,15 @@ public class PlayerCurrencyOfficer : MonoBehaviour
         Money += moneyToDeposit;
     }
 
-    public void GetMoneyDataFromDataManager()
+    public void GetMoneyDataFromDataManager(int moneyData)
     {
-        if (testData)
+        if (moneyData == -1)
         {
-            Money = testMoneyStartData;
+            Money = moneyAtStart;
         }
         else
         {
-            //Money = moneyFromData; // Get the data from datamanager
-        }
-        
+            Money = moneyData; // Get the data from datamanager  
+        }      
     }
 }

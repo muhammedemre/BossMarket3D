@@ -57,6 +57,7 @@ public class RoomCustomerOfficer : MonoBehaviour
             if (itemStandActorsQueue.Count > 0)
             {
                 CustomerActor currentCustomer = CreateACustomer();
+                LevelManager.instance.levelCreateOfficer.currentLevel.GetComponent<LevelActor>().levelRoomOfficer.RegisterCustomer(currentCustomer);
                 currentCustomer.customerAIOfficer.BuySomething(itemStandActorsQueue[0]);
                 itemStandActorsQueue[0].busy = true;
                 itemStandActorsQueue.RemoveAt(0);
