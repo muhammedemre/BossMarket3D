@@ -13,7 +13,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3f13152b519b9bf499f82668959a1b06, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -170.75
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3f13152b519b9bf499f82668959a1b06, type: 3}
       propertyPath: m_LocalPosition.y
@@ -21,7 +21,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3f13152b519b9bf499f82668959a1b06, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 12.8
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3f13152b519b9bf499f82668959a1b06, type: 3}
       propertyPath: m_LocalRotation.w
@@ -53,7 +53,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 3f13152b519b9bf499f82668959a1b06, type: 3}
       propertyPath: m_Name
-      value: CakeA02
+      value: CakeA02 Variant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f13152b519b9bf499f82668959a1b06, type: 3}
