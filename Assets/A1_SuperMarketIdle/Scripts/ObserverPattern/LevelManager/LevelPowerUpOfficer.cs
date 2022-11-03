@@ -6,8 +6,17 @@ using UnityEngine;
 public class LevelPowerUpOfficer : MonoBehaviour
 {
     public bool speedUpActive = false, coinBoostActive = false;
-    public float coinBoostCoefficient = 1, speedUpCoefficient = 1;
+    public float coinBoostCoefficient = 1, speedUpCoefficient = 1, coinRewardProcent;
     float normalCustomerSpeed;
+    [SerializeField] GameObject powerBoostBoxPrefab;
+
+    [SerializeField] float powerBoostBoxFrequency;
+    float nextPowerBoostBoxAdditionTime;
+
+    private void Update()
+    {
+        PowerBoostAddCheck();
+    }
 
     public void FillTheRoomsItemStands() 
     {
@@ -74,6 +83,44 @@ public class LevelPowerUpOfficer : MonoBehaviour
         
     }
 
+    void RandomlyPlaceAPowerBoostBox() 
+    {
+        
+        LevelActor currentLevelActor = LevelManager.instance.levelCreateOfficer.currentLevel.GetComponent<LevelActor>();
+        DestroyPreviousBoxes(currentLevelActor);
+
+        int randomIndexForTheRoom = Random.Range(0, currentLevelActor.levelDataOfficer.activeRooms.Count);
+        GameObject randomRoomToPlaceTheBox = currentLevelActor.levelDataOfficer.activeRooms[randomIndexForTheRoom];
+
+        int randomIndexForBoxPlace = Random.Range(0, randomRoomToPlaceTheBox.GetComponent<RoomActor>().powerBoostPlacementPositions.childCount);
+        Transform boxPosition = randomRoomToPlaceTheBox.GetComponent<RoomActor>().powerBoostPlacementPositions.GetChild(randomIndexForBoxPlace);
+
+        GameObject tempPowerBoostBox = Instantiate(powerBoostBoxPrefab, boxPosition.position, Quaternion.identity, boxPosition);
+        tempPowerBoostBox.GetComponent<PowerBoostBoxActor>().powerBoostModelOfficer.SelectARandomModel();
+    }
+    void DestroyPreviousBoxes(LevelActor currentLevelActor) // if not looted yet.
+    {
+        foreach (GameObject room in currentLevelActor.levelDataOfficer.activeRooms.Values)
+        {
+            foreach (Transform position in room.GetComponent<RoomActor>().powerBoostPlacementPositions)
+            {
+                if (position.childCount > 0)
+                {
+                    Destroy(position.GetChild(0).gameObject);
+                }
+            }
+        }
+    }
+
+    void PowerBoostAddCheck() 
+    {
+        if (nextPowerBoostBoxAdditionTime < Time.time)
+        {
+            nextPowerBoostBoxAdditionTime = Time.time + powerBoostBoxFrequency;
+            RandomlyPlaceAPowerBoostBox();
+        }
+    }
+
 
     #region Button
 
@@ -88,6 +135,13 @@ public class LevelPowerUpOfficer : MonoBehaviour
     void ButtonFillTheRoomsItemStands()
     {
         FillTheRoomsItemStands();
+    }
+
+    [Title("RandomlyPlaceAPowerBoostBox")]
+    [Button("RandomlyPlaceAPowerBoostBox", ButtonSizes.Large)]
+    void ButtonRandomlyPlaceAPowerBoostBox()
+    {
+        RandomlyPlaceAPowerBoostBox();
     }
     #endregion
 }

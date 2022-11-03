@@ -13,6 +13,7 @@ public class RoomActor : MonoBehaviour
     public ActivisionPointAnchor roomPortionActivator;
     public int itemPriceInBanknotesForThisRoom = 2, banknoteValue;
     public bool isActive = false;
+    public Transform powerBoostPlacementPositions;
     [SerializeField] int roomIndex;
     [SerializeField] float TruckFirstComeDelay;
 
