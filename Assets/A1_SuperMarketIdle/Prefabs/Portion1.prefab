@@ -104,6 +104,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6736391142031371431}
     m_Modifications:
+    - target: {fileID: 511032577679528028, guid: 37be5e1fbf0f3467ab96a5d468519c0e, type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 511032577679528028, guid: 37be5e1fbf0f3467ab96a5d468519c0e, type: 3}
     - target: {fileID: 618822209815075849, guid: 37be5e1fbf0f3467ab96a5d468519c0e, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -269,6 +273,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6736391142031371431}
     m_Modifications:
+    - target: {fileID: 511032577679528028, guid: 37be5e1fbf0f3467ab96a5d468519c0e, type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 511032577679528028, guid: 37be5e1fbf0f3467ab96a5d468519c0e, type: 3}
     - target: {fileID: 618822209815075849, guid: 37be5e1fbf0f3467ab96a5d468519c0e, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -464,7 +472,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 925403fc2dceb4e46b781ae410de0d67, type: 3}
       propertyPath: m_Name
-      value: FilterA01
+      value: FilterA01Portion
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 925403fc2dceb4e46b781ae410de0d67, type: 3}
