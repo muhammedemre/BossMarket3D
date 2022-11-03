@@ -19,15 +19,15 @@ public class UITaskOfficers : MonoBehaviour
 
     public void UpgradeWindowSetState(bool state, RoomActor relatedRoomActor)
     {
-        
-        UIManager.instance.upgradeWindow.transform.GetChild(0).gameObject.SetActive(state);       
+
+        UIManager.instance.upgradeWindow.transform.GetChild(0).gameObject.SetActive(state);
         if (state)
         {
             UIManager.instance.upgradeWindow.GetComponent<UpgradeWindowUpgradeOfficer>().relatedRoomActor = relatedRoomActor;
             UIManager.instance.upgradeWindow.GetComponent<UpgradeWindowActor>().GetPrepared();
         }
     }
-    
+
     public void TruckUpgradeWindowClose()
     {
         OpenAndCloseTruckUpgradeWindow(false, null);
@@ -48,4 +48,15 @@ public class UITaskOfficers : MonoBehaviour
         PlayerManager.instance.playerCurrencyOfficer.Money += 9999;
     }
 
+    public void ActiveAdsRewardPopUp(AdsRewardPopUpState adsRewardPopUpState)
+    {
+        AdsRewardPopUpActor adsRewardPopUpActor = UIManager.instance.adsRewardPopUpWindow;
+        adsRewardPopUpActor.gameObject.SetActive(true);
+        adsRewardPopUpActor.ActivePopUpState(adsRewardPopUpState);
+    }
+
+    public void DeactivateAdsRewardPopUp()
+    {
+        UIManager.instance.adsRewardPopUpWindow.gameObject.SetActive(false);
+    }
 }

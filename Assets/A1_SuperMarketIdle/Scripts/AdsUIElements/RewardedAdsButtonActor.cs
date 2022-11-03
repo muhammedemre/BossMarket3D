@@ -25,23 +25,26 @@ public class RewardedAdsButtonActor : MonoBehaviour
         button.onClick.RemoveListener(OnClick);
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
-        if (!isLoaded)
-        {
-            CheckInteractable();
-        }
+        CheckInteractable();
     }
 
     private void CheckInteractable()
     {
         isLoaded = AdsManager.instance.adsActor.adsShowOfficer.RewardedAds[placement].IsLoaded();
-        if (isLoaded) button.interactable = true;
+        button.interactable = isLoaded;
     }
 
     private void OnClick()
     {
-        OnReward?.Invoke();
+        button.interactable = false;
+        isLoaded = false;
+        AdsManager.instance.adsActor.adsShowOfficer.ShowRewardedAd(placement, (_) =>
+        {
+            UIManager.instance.UITaskOfficers.DeactivateAdsRewardPopUp();
+            OnReward?.Invoke();
+        });
     }
 }
 

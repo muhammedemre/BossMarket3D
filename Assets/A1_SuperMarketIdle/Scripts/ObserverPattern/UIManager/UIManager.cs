@@ -8,6 +8,7 @@ public class UIManager : Manager
     public static UIManager instance;
     public UITaskOfficers UITaskOfficers;
     public GameObject menu, inGameScreen, InGameMoney, InGameMoneyImage, settingsWindow, upgradeWindow, truckUpgradeWindow, dragToMoveScreen, splashScreenVideo;
+    public AdsRewardPopUpActor adsRewardPopUpWindow;
     public Canvas mainCanvas;
     public SettingsMenuActor settingsMenuActor;
     [SerializeField] TextMeshProUGUI moneyText;
@@ -16,7 +17,7 @@ public class UIManager : Manager
     {
         StaticCheck();
     }
-    
+
     void StaticCheck()
     {
         if (instance != null)

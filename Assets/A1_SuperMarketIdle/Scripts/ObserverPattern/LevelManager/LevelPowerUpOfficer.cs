@@ -18,18 +18,18 @@ public class LevelPowerUpOfficer : MonoBehaviour
         PowerBoostAddCheck();
     }
 
-    public void FillTheRoomsItemStands() 
+    public void FillTheRoomsItemStands()
     {
         RoomActor theRoomPlayerIsIn = LevelManager.instance.levelCreateOfficer.currentLevel.GetComponent<LevelActor>().levelRoomOfficer.FindTheRoomThatPlayerIn();
         foreach (Transform itemStand in theRoomPlayerIsIn.roomFixturesOfficer.roomItemStands)
         {
-            ItemStandActor itemStandActor= itemStand.GetComponent<ItemStandActor>();
+            ItemStandActor itemStandActor = itemStand.GetComponent<ItemStandActor>();
             int neededAmountToGetfull = itemStandActor.itemStandItemHandleOfficer.capacity - itemStandActor.itemStandItemHandleOfficer.storageList.Count;
             itemStandActor.itemStandItemHandleOfficer.AddItemsToStandFromScript(neededAmountToGetfull);
         }
-        
+
     }
-    public void SpeedUpTheCustomersForSomeTime(float speedBoostCoefficient, float duration) 
+    public void SpeedUpTheCustomersForSomeTime(float speedBoostCoefficient, float duration)
     {
         ChangeTheSpeedOfCustomers(true, speedBoostCoefficient);
         StartCoroutine(DeactivateSpeedUpTheCustomers(duration));
@@ -40,14 +40,14 @@ public class LevelPowerUpOfficer : MonoBehaviour
         PlayerManager.instance.playerCurrencyOfficer.MoneyDepositToTheWallet(coinAmount);
     }
 
-    public void CoinEarnBoostForSomeTime(float _coinBoostCoefficient, float duration) 
+    public void CoinEarnBoostForSomeTime(float _coinBoostCoefficient, float duration)
     {
         coinBoostActive = true;
         coinBoostCoefficient = _coinBoostCoefficient;
         StartCoroutine(DeactivateCoinBoost(duration));
     }
 
-    IEnumerator DeactivateCoinBoost(float duration) 
+    IEnumerator DeactivateCoinBoost(float duration)
     {
         yield return new WaitForSeconds(duration);
         coinBoostActive = false;
@@ -61,7 +61,7 @@ public class LevelPowerUpOfficer : MonoBehaviour
         ChangeTheSpeedOfCustomers(false, 1);
     }
 
-    void ChangeTheSpeedOfCustomers(bool boost, float speedCoefficient) 
+    void ChangeTheSpeedOfCustomers(bool boost, float speedCoefficient)
     {
         if (boost)
         {
@@ -80,12 +80,12 @@ public class LevelPowerUpOfficer : MonoBehaviour
                 customer.customerMoveOfficer.SetTheCustomerSpeed(boostedSpeed);
             }
         }
-        
+
     }
 
-    void RandomlyPlaceAPowerBoostBox() 
+    void RandomlyPlaceAPowerBoostBox()
     {
-        
+
         LevelActor currentLevelActor = LevelManager.instance.levelCreateOfficer.currentLevel.GetComponent<LevelActor>();
         DestroyPreviousBoxes(currentLevelActor);
 
@@ -98,7 +98,8 @@ public class LevelPowerUpOfficer : MonoBehaviour
         GameObject tempPowerBoostBox = Instantiate(powerBoostBoxPrefab, boxPosition.position, Quaternion.identity, boxPosition);
         tempPowerBoostBox.GetComponent<PowerBoostBoxActor>().powerBoostModelOfficer.SelectARandomModel();
     }
-    void DestroyPreviousBoxes(LevelActor currentLevelActor) // if not looted yet.
+
+    public void DestroyPreviousBoxes(LevelActor currentLevelActor) // if not looted yet.
     {
         foreach (GameObject room in currentLevelActor.levelDataOfficer.activeRooms.Values)
         {
@@ -112,7 +113,7 @@ public class LevelPowerUpOfficer : MonoBehaviour
         }
     }
 
-    void PowerBoostAddCheck() 
+    void PowerBoostAddCheck()
     {
         if (nextPowerBoostBoxAdditionTime < Time.time)
         {
