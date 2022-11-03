@@ -19,13 +19,14 @@ public class PlayerInteractionOfficer : MonoBehaviour
         {
             PowerBoostModelOfficer.PowerBoostType powerBoostType = other.GetComponent<RootFinderOfficer>().root.GetComponent<PowerBoostBoxActor>().selectedBoostType;
 
+            LevelManager.instance.levelPowerUpOfficer.DestroyPreviousBoxes(LevelManager.instance.levelCreateOfficer.currentLevel.GetComponent<LevelActor>());
             if (powerBoostType == PowerBoostModelOfficer.PowerBoostType.GiftBox)
             {
-                Debug.Log("GiftBox Intercation");
+                UIManager.instance.UITaskOfficers.ActiveAdsRewardPopUp(AdsRewardPopUpState.FillRoom);
             }
             else if (powerBoostType == PowerBoostModelOfficer.PowerBoostType.Case)
             {
-                Debug.Log("Case Intercation");
+                UIManager.instance.UITaskOfficers.ActiveAdsRewardPopUp(AdsRewardPopUpState.FreeCoins);
             }
         }
     }
