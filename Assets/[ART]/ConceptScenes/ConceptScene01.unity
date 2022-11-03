@@ -8795,6 +8795,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -2.01
       objectReference: {fileID: 0}
+    - target: {fileID: 2100192442301644548, guid: e1e5853fc171e874fba51d165c329ca1, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e6cd032800a082d4dba32c7edd40bf4b, type: 2}
     - target: {fileID: 6999086830434699599, guid: e1e5853fc171e874fba51d165c329ca1, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -22737,6 +22741,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0.52
       objectReference: {fileID: 0}
+    - target: {fileID: 3338326792459255227, guid: c82a1f55d01ada44ab0e3e98be4bffb2, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e6cd032800a082d4dba32c7edd40bf4b, type: 2}
     - target: {fileID: 3644742910672045732, guid: c82a1f55d01ada44ab0e3e98be4bffb2, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -28925,6 +28933,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -2.06
       objectReference: {fileID: 0}
+    - target: {fileID: 2100192442301644548, guid: e1e5853fc171e874fba51d165c329ca1, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e6cd032800a082d4dba32c7edd40bf4b, type: 2}
     - target: {fileID: 3941927184504922138, guid: e1e5853fc171e874fba51d165c329ca1, type: 3}
       propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.scalar
       value: 15
