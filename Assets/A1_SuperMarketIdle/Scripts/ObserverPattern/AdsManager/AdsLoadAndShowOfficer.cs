@@ -80,6 +80,9 @@ public class AdsLoadAndShowOfficer : MonoBehaviour
         {
             InterstitialAds.Add(placement, new InterstitialAd(unitId));
         }
+
+        AdRequest request = new AdRequest.Builder().Build();
+        InterstitialAds[placement].LoadAd(request);
     }
 
     /// <param name="onRewarded">Returns the reward amount</param>

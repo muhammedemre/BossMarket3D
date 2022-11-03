@@ -32,7 +32,7 @@ public class ActivisionCalculateOfficer : MonoBehaviour
         if (other.tag == "Player")
         {
             InvestmentCheck();
-        }       
+        }
     }
     void InvestmentCheck()
     {
@@ -53,6 +53,14 @@ public class ActivisionCalculateOfficer : MonoBehaviour
                 active = true;
                 DeductFromPlayersMoney(perInvestmentAmount - totalInvestmentRequired);
                 ActivateTheObject();
+                if (objectToActivate.TryGetComponent<PortionActor>(out PortionActor pa))
+                {
+                    AdsManager.instance.adsActor.adsShowOfficer.ShowInterstitialAd(MyGoogleAdMob.AdPlacement.RoomExtend);
+                }
+                else if (objectToActivate.TryGetComponent<RoomActor>(out RoomActor ra))
+                {
+                    AdsManager.instance.adsActor.adsShowOfficer.ShowInterstitialAd(MyGoogleAdMob.AdPlacement.RoomAdd);
+                }
                 if (UIManager.instance.settingsMenuActor.soundState)
                 {
                     audioSource.Play();
@@ -92,7 +100,7 @@ public class ActivisionCalculateOfficer : MonoBehaviour
         {
             GameObject tempconfettiItemStandOpening = Instantiate(confettiItemStandOpeningPrefab, objectToActivate.transform.position, confettiItemStandOpeningPrefab.transform.rotation, objectToActivate.transform);
             Destroy(tempconfettiItemStandOpening, 5f);
-        }       
+        }
         Destroy(tempExplosionConfetti, 5f);
         StartCoroutine(DestroyDelayer());
         //gameObject.SetActive(false);

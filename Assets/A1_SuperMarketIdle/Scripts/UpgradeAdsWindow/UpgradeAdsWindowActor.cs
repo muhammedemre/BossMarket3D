@@ -46,6 +46,10 @@ public class UpgradeAdsWindowActor : MonoBehaviour
         {
             CashierUpgradeAds.SetActive(true);
         }
+        else if (state == UpgradeAdsWindowState.Nan)
+        {
+            LevelManager.instance.levelPowerUpOfficer.RandomlyUpgradeAdsWindow();
+        }
     }
 
     private void DeactiveAllStates()

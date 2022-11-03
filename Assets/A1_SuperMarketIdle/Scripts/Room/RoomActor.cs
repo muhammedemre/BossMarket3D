@@ -20,12 +20,12 @@ public class RoomActor : MonoBehaviour
     private void Start()
     {
         LetLevelDataIamActivated();
-        StartCoroutine(RoomActivate());     
+        StartCoroutine(RoomActivate());
     }
 
     public IEnumerator RoomActivate()
     {
-        yield return new WaitForSeconds(UIManager.instance.splashVideoDuration+ TruckFirstComeDelay);
+        yield return new WaitForSeconds(UIManager.instance.splashVideoDuration + TruckFirstComeDelay);
         roomTruckOfficer.CallTheTruck();
         //roomFixturesOfficer.ActivateNavmeshSurfaceOnTheRoom();
     }
@@ -36,7 +36,7 @@ public class RoomActor : MonoBehaviour
         {
             LevelManager.instance.levelCreateOfficer.currentLevel.GetComponent<LevelActor>().levelDataOfficer.LetMeKnowRoomIsActivated(roomIndex, gameObject);
         }
-        
+
         //DataManager.instance.DataSaveAndLoadOfficer.SaveTheData();
     }
 }

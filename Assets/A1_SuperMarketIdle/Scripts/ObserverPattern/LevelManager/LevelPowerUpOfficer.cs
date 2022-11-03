@@ -13,6 +13,11 @@ public class LevelPowerUpOfficer : MonoBehaviour
     [SerializeField] float powerBoostBoxFrequency;
     float nextPowerBoostBoxAdditionTime;
 
+    private void Start()
+    {
+        RandomlyUpgradeAdsWindow();
+    }
+
     private void Update()
     {
         PowerBoostAddCheck();
