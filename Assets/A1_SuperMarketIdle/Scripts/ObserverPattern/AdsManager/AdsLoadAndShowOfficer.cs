@@ -51,10 +51,12 @@ public class AdsLoadAndShowOfficer : MonoBehaviour
             else unitId = type.iosUnitID;
         }
 
-        if (!RewardedAds.ContainsKey(placement))
+        if (RewardedAds.ContainsKey(placement))
         {
-            RewardedAds.Add(placement, new RewardedAd(unitId));
+            RewardedAds.Remove(placement);
         }
+
+        RewardedAds.Add(placement, new RewardedAd(unitId));
 
         AdRequest request = new AdRequest.Builder().Build();
         RewardedAds[placement].LoadAd(request);
@@ -76,28 +78,36 @@ public class AdsLoadAndShowOfficer : MonoBehaviour
             else unitId = type.iosUnitID;
         }
 
-        if (!InterstitialAds.ContainsKey(placement))
+        if (InterstitialAds.ContainsKey(placement))
         {
-            InterstitialAds.Add(placement, new InterstitialAd(unitId));
+            InterstitialAds.Remove(placement);
         }
+
+        InterstitialAds.Add(placement, new InterstitialAd(unitId));
 
         AdRequest request = new AdRequest.Builder().Build();
         InterstitialAds[placement].LoadAd(request);
     }
 
     /// <param name="onRewarded">Returns the reward amount</param>
-    public void ShowRewardedAd(AdPlacement placement, UnityAction<double> onRewarded)
+    public void ShowRewardedAd(AdPlacement placement, UnityAction<double> onRewarded, UnityAction<string> onError = null)
     {
         if (!RewardedAds.ContainsKey(placement))
         {
             Debug.Log($"Not found '{placement.ToString()}' ad");
+            onError?.Invoke($"Not found '{placement.ToString()}' ad");
             return;
         }
         if (RewardedAds[placement].IsLoaded())
         {
             RewardedAds[placement].Show();
-            LoadRewardedAd(placement, googleAdMobAdsDataOfficer.Ads[placement]);
-            RewardedAds[placement].OnUserEarnedReward += (sender, args) => onRewarded?.Invoke(args.Amount);
+
+            RewardedAds[placement].OnUserEarnedReward += (sender, args) =>
+            {
+                onRewarded?.Invoke(args.Amount);
+                LoadRewardedAd(placement, googleAdMobAdsDataOfficer.Ads[placement]);
+            };
+            RewardedAds[placement].OnAdFailedToShow += (_, error) => onError?.Invoke(error.AdError.GetMessage());
         }
     }
 
@@ -111,8 +121,11 @@ public class AdsLoadAndShowOfficer : MonoBehaviour
         if (InterstitialAds[placement].IsLoaded())
         {
             InterstitialAds[placement].Show();
-            LoadInterstitialAd(placement, googleAdMobAdsDataOfficer.Ads[placement]);
-            InterstitialAds[placement].OnAdClosed += (sender, args) => onClosed?.Invoke();
+            InterstitialAds[placement].OnAdClosed += (sender, args) =>
+            {
+                onClosed?.Invoke();
+                LoadInterstitialAd(placement, googleAdMobAdsDataOfficer.Ads[placement]);
+            };
         }
     }
 }

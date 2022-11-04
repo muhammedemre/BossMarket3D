@@ -80,10 +80,7 @@ public class UpgradeButtonActor : MonoBehaviour
         {
             FullyUpgradedProcess();
 
-            if (buttonType == ButtonType.TruckUpgrade)
-            {
-                ButtonLevelInfoText(buttonLevel);
-            }
+            ButtonLevelInfoText(buttonLevel);
         }
         else
         {
@@ -92,7 +89,7 @@ public class UpgradeButtonActor : MonoBehaviour
             {
                 spriteAndLabelIndex = (buttonLevel == 0) ? 0 : 1;
 
-                ButtonLevelInfoText(buttonLevel - 1);
+                ButtonLevelInfoText(buttonLevel);
             }
             else
             {
@@ -164,19 +161,30 @@ public class UpgradeButtonActor : MonoBehaviour
                 AdsManager.instance.adsActor.adsShowOfficer.ShowRewardedAd(MyGoogleAdMob.AdPlacement.WorkerUpgrade, (_) =>
                 {
                     UpgradeWorkerSuccess(_buttonIndex);
+                }, (errorMessage) =>
+                {
+                    Debug.Log(errorMessage);
                 });
             }
         }
         else if (buttonLevel == DataManager.instance.gameVariablesData.PlayerUpgradeButtonCosts.Count - 1)//Button max level
         {
-            bool playerHasEnoughMoney = CheckIfPlayerHasEnoughMoney(DataManager.instance.gameVariablesData.PlayerUpgradeButtonCosts[buttonLevel]);
-            if (playerHasEnoughMoney)
-            {
-                PlayerManager.instance.playerCurrencyOfficer.Money -= DataManager.instance.gameVariablesData.PlayerUpgradeButtonCosts[buttonLevel];
-                upgradeWindowActor.upgradeWindowUpgradeOfficer.WorkerUpgradeButton(_buttonIndex);
-                buttonLevel++;
-                SetButtonState(true);
-            }
+            AdsManager.instance.adsActor.adsShowOfficer.ShowRewardedAd(MyGoogleAdMob.AdPlacement.WorkerUpgrade, (_) =>
+                {
+                    UpgradeWorkerSuccess(_buttonIndex);
+                }, (errorMessage) =>
+                {
+                    Debug.Log(errorMessage);
+                });
+
+            // bool playerHasEnoughMoney = CheckIfPlayerHasEnoughMoney(DataManager.instance.gameVariablesData.PlayerUpgradeButtonCosts[buttonLevel]);
+            // if (playerHasEnoughMoney)
+            // {
+            //     PlayerManager.instance.playerCurrencyOfficer.Money -= DataManager.instance.gameVariablesData.PlayerUpgradeButtonCosts[buttonLevel];
+            //     upgradeWindowActor.upgradeWindowUpgradeOfficer.WorkerUpgradeButton(_buttonIndex);
+            //     buttonLevel++;
+            //     SetButtonState(true);
+            // }
         }
     }
 
@@ -184,7 +192,10 @@ public class UpgradeButtonActor : MonoBehaviour
     {
         upgradeWindowActor.upgradeWindowUpgradeOfficer.WorkerUpgradeButton(_buttonIndex);
         buttonLevel++;
-        int newCost = DataManager.instance.gameVariablesData.WorkerUpgradeButtonCosts[buttonLevel];
+        if (buttonLevel < DataManager.instance.gameVariablesData.WorkerUpgradeButtonCosts.Count - 1)
+        {
+            int newCost = DataManager.instance.gameVariablesData.WorkerUpgradeButtonCosts[buttonLevel];
+        }
         PrepareTheButton();
     }
 
