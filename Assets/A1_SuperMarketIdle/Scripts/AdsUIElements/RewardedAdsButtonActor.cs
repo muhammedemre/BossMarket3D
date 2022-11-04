@@ -41,11 +41,13 @@ public class RewardedAdsButtonActor : SerializedMonoBehaviour
     {
         button.interactable = false;
         isLoaded = false;
-        Debug.Log("Click");
         AdsManager.instance.adsActor.adsShowOfficer.ShowRewardedAd(placement, (_) =>
         {
             UIManager.instance.UITaskOfficers.DeactivateAdsRewardPopUp();
             OnReward?.Invoke();
+        }, (errorMessage) =>
+        {
+            Debug.LogError(errorMessage);
         });
     }
 }

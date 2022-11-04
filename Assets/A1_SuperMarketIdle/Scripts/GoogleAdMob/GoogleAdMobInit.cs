@@ -5,6 +5,7 @@ using UnityEngine;
 using GoogleMobileAds.Api;
 using System;
 using UnityEngine.Events;
+using GoogleMobileAds.Common;
 
 namespace MyGoogleAdMob
 {
@@ -24,9 +25,12 @@ namespace MyGoogleAdMob
 
         private void Start()
         {
+            MobileAds.SetiOSAppPauseOnBackground(true);
+
             RequestConfiguration requestConfiguration = new RequestConfiguration.Builder().SetSameAppKeyEnabled(true).build();
             MobileAds.SetRequestConfiguration(requestConfiguration);
 
+            MobileAdsEventExecutor.Initialize();
             MobileAds.Initialize(HandleInitCompleteAction);
         }
 

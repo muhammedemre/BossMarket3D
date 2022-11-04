@@ -24,7 +24,7 @@ MonoBehaviour:
   status: 1
   xfbml: 0
   frictionlessRequests: 1
-  androidKeystorePath: /Users/emre/UnityProjects/SupermarketIdle/Keystores/BossMarketKeystore.keystore
+  androidKeystorePath: C:/Users/anils/Documents/Unity/BossMarket3D\Keystores/BossMarketKeystore.keystore
   iosURLSuffix: 
   appLinkSchemes:
   - list: []

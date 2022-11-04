@@ -4,6 +4,7 @@ using UnityEngine;
 using MyGoogleAdMob;
 using GoogleMobileAds.Api;
 using UnityEngine.Events;
+using GoogleMobileAds.Common;
 
 public class AdsLoadAndShowOfficer : MonoBehaviour
 {
@@ -104,8 +105,11 @@ public class AdsLoadAndShowOfficer : MonoBehaviour
 
             RewardedAds[placement].OnUserEarnedReward += (sender, args) =>
             {
-                onRewarded?.Invoke(args.Amount);
-                LoadRewardedAd(placement, googleAdMobAdsDataOfficer.Ads[placement]);
+                MobileAdsEventExecutor.ExecuteInUpdate(() =>
+                {
+                    onRewarded?.Invoke(args.Amount);
+                    LoadRewardedAd(placement, googleAdMobAdsDataOfficer.Ads[placement]);
+                });
             };
             RewardedAds[placement].OnAdFailedToShow += (_, error) => onError?.Invoke(error.AdError.GetMessage());
         }

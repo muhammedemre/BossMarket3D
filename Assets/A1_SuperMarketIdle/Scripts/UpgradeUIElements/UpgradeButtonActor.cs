@@ -163,7 +163,7 @@ public class UpgradeButtonActor : MonoBehaviour
                     UpgradeWorkerSuccess(_buttonIndex);
                 }, (errorMessage) =>
                 {
-                    Debug.Log(errorMessage);
+                    Debug.LogError(errorMessage);
                 });
             }
         }
@@ -174,7 +174,7 @@ public class UpgradeButtonActor : MonoBehaviour
                     UpgradeWorkerSuccess(_buttonIndex);
                 }, (errorMessage) =>
                 {
-                    Debug.Log(errorMessage);
+                    Debug.LogError(errorMessage);
                 });
 
             // bool playerHasEnoughMoney = CheckIfPlayerHasEnoughMoney(DataManager.instance.gameVariablesData.PlayerUpgradeButtonCosts[buttonLevel]);
