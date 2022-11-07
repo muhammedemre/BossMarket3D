@@ -29,17 +29,17 @@ MonoBehaviour:
     referenceMode: 2
     serializationDepthLimit: 64
     assemblyNames:
-    - Assembly-CSharp
     - Assembly-CSharp-firstpass
-    - Cinemachine
-    - IngameDebugConsole.Runtime
+    - Assembly-CSharp
     - Lofelt.NiceVibrations.Demo
-    - Lofelt.NiceVibrations
+    - Cinemachine
     - Sirenix.OdinInspector.CompatibilityLayer
-    - GoogleMobileAds.Editor
+    - IngameDebugConsole.Runtime
+    - Lofelt.NiceVibrations
     - Sirenix.OdinInspector.CompatibilityLayer.Editor
-    - Lofelt.NiceVibrations.Editor
+    - GoogleMobileAds.Editor
     - IngameDebugConsole.Editor
+    - Lofelt.NiceVibrations.Editor
     showAdvancedSettings: 0
   addMgrToSceneAutomatically: 0
   autoUpdateReferences: 1

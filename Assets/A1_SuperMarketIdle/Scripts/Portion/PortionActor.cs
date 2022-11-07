@@ -10,6 +10,7 @@ public class PortionActor : MonoBehaviour
     private void Start()
     {
         LetLevelDataIamActivated();
+        TriggerTheRoomEvent();
         RegisterToLevelNavmesh();
     }
 
@@ -22,5 +23,10 @@ public class PortionActor : MonoBehaviour
     {
         relatedRoomActor.roomDataOfficer.isPortionOpen = true;
         //DataManager.instance.DataSaveAndLoadOfficer.SaveTheData();
+    }
+
+    void TriggerTheRoomEvent() 
+    {
+        EventsManager.instance.RoomEventsTrigger(false, relatedRoomActor.roomIndex);
     }
 }

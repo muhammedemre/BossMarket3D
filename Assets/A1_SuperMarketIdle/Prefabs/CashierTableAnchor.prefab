@@ -13016,6 +13016,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CashierWorkerAnchor
       objectReference: {fileID: 0}
+    - target: {fileID: 6335632192842634260, guid: e045ac79011768a42bc89f343ad9933e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6335632192842634261, guid: e045ac79011768a42bc89f343ad9933e, type: 3}
       propertyPath: m_RootOrder
       value: 5

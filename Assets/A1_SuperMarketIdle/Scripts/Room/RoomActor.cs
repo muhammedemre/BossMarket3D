@@ -14,12 +14,13 @@ public class RoomActor : MonoBehaviour
     public int itemPriceInBanknotesForThisRoom = 2, banknoteValue;
     public bool isActive = false;
     public Transform powerBoostPlacementPositions;
-    [SerializeField] int roomIndex;
+    public int roomIndex;
     [SerializeField] float TruckFirstComeDelay;
 
     private void Start()
     {
         LetLevelDataIamActivated();
+        TriggerTheRoomEvent();
         StartCoroutine(RoomActivate());
     }
 
@@ -38,5 +39,10 @@ public class RoomActor : MonoBehaviour
         }
 
         //DataManager.instance.DataSaveAndLoadOfficer.SaveTheData();
+    }
+
+    void TriggerTheRoomEvent()
+    {
+        EventsManager.instance.RoomEventsTrigger(true, roomIndex);
     }
 }

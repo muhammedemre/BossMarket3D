@@ -1,9 +1,9 @@
 {
-    "m_SelectedDeviceId": "YDJNPBCIFUDMJJO7",
+    "m_SelectedDeviceId": "da02b389",
     "m_SelectedPackage": {
-        "deviceId": "YDJNPBCIFUDMJJO7",
-        "name": "com.Berry.BossMarket3D",
-        "processId": 24567,
+        "deviceId": "",
+        "name": "",
+        "processId": 0,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -25,6 +25,18 @@
             "name": "com.Berry.BossMarket3D",
             "processId": 24567,
             "exited": false
+        },
+        {
+            "deviceId": "da02b389",
+            "name": "com.Berry.BossMarket3D",
+            "processId": 19793,
+            "exited": true
+        },
+        {
+            "deviceId": "da02b389",
+            "name": "com.Berry.BossMarket3D",
+            "processId": 21436,
+            "exited": true
         }
     ],
     "m_Tags": {
