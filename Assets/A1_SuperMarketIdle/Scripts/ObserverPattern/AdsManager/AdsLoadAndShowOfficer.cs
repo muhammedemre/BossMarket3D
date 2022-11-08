@@ -102,11 +102,11 @@ public class AdsLoadAndShowOfficer : MonoBehaviour
         if (RewardedAds[placement].IsLoaded())
         {
             RewardedAds[placement].Show();
-
             RewardedAds[placement].OnUserEarnedReward += (sender, args) =>
             {
                 MobileAdsEventExecutor.ExecuteInUpdate(() =>
                 {
+                    AdTrigger(placement, AdFormat.Rewarded);
                     onRewarded?.Invoke(args.Amount);
                     LoadRewardedAd(placement, googleAdMobAdsDataOfficer.Ads[placement]);
                 });
@@ -125,11 +125,21 @@ public class AdsLoadAndShowOfficer : MonoBehaviour
         if (InterstitialAds[placement].IsLoaded())
         {
             InterstitialAds[placement].Show();
+            InterstitialAds[placement].OnAdOpening += (_, __) =>
+            {
+                AdTrigger(placement, AdFormat.Interstitial);
+            };
             InterstitialAds[placement].OnAdClosed += (sender, args) =>
             {
                 onClosed?.Invoke();
                 LoadInterstitialAd(placement, googleAdMobAdsDataOfficer.Ads[placement]);
             };
         }
+    }
+
+    private void AdTrigger(AdPlacement placement, AdFormat format)
+    {
+        RoomActor inRoom = LevelManager.instance.levelCreateOfficer.currentLevel.GetComponent<LevelActor>().levelRoomOfficer.FindTheRoomThatPlayerIn();
+        EventsManager.instance.AddsTrigger("{placement.ToString()}_Show_{format}Ad", inRoom.roomIndex);
     }
 }
