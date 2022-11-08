@@ -48,8 +48,14 @@ public class LevelPowerUpOfficer : MonoBehaviour
 
     public void CoinRewardCalculateAndTrigger() 
     {
-        int rewardAmount = (int)(PlayerManager.instance.playerCurrencyOfficer.investedMoneyAmount * coinRewardProcent);
+        int rewardAmount = CoinRewardCalculate();
+        rewardAmount = rewardAmount < 500 ? 500 : rewardAmount;
         GetCoinReward(rewardAmount);
+    }
+
+    public int CoinRewardCalculate() 
+    {
+        return (int)(PlayerManager.instance.playerCurrencyOfficer.investedMoneyAmount * coinRewardProcent);
     }
     public void GetCoinReward(int coinAmount)
     {
