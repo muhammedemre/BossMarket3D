@@ -114,7 +114,7 @@ public class DataSaveAndLoadOfficer : MonoBehaviour
     }
     public void RefreshTheData()
     {
-        List<string> keyList = new List<string>() { "playerCapacityLevel", "playerSpeedLevel", "playerMoney", "tutorialFinished", "activeRoomsData", "musicGame", "soundGame", "vibrationGame"};
+        List<string> keyList = new List<string>() { "playerCapacityLevel", "playerSpeedLevel", "playerMoney", "tutorialFinished", "activeRoomsData", "musicGame", "soundGame", "vibrationGame", "leftInvestments" };
         foreach (string key in keyList)
         {
             ES3.DeleteKey(key);
@@ -123,7 +123,7 @@ public class DataSaveAndLoadOfficer : MonoBehaviour
     }
     public void DisplayTheData()
     {
-        List<string> keyList = new List<string>() { "playerCapacityLevel", "playerSpeedLevel", "playerMoney", "tutorialFinished", "activeRoomsData", "musicGame", "soundGame", "vibrationGame" };
+        List<string> keyList = new List<string>() { "playerCapacityLevel", "playerSpeedLevel", "playerMoney", "tutorialFinished", "activeRoomsData", "musicGame", "soundGame", "vibrationGame", "leftInvestments" };
         foreach (string key in keyList)
         {
             print(key+ " : " + ES3.Load(key)) ;

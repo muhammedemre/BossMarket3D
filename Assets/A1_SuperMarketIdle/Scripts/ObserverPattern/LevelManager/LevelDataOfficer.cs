@@ -42,10 +42,14 @@ public class LevelDataOfficer : SerializedMonoBehaviour
     public void AssignLeftInvestmentAmounts(List<int> investmentLeftAmounts) 
     {
         investmentLeftAmountsTest = investmentLeftAmounts;
-        for (int i = 0; i < levelActivisionPoints.Count; i++)
+        print("investmentLeftAmounts : "+ investmentLeftAmounts.Count);
+        if (investmentLeftAmounts.Count > 0)
         {
-            levelActivisionPoints[i].ActivisionCalculateOfficer.totalInvestmentRequired = investmentLeftAmounts[i];
-            levelActivisionPoints[i].ActivisionCalculateOfficer.VisualProcess(investmentLeftAmounts[i]);
-        }
+            for (int i = 0; i < levelActivisionPoints.Count; i++)
+            {
+                levelActivisionPoints[i].ActivisionCalculateOfficer.totalInvestmentRequired = investmentLeftAmounts[i];
+                levelActivisionPoints[i].ActivisionCalculateOfficer.VisualProcess(investmentLeftAmounts[i]);
+            }
+        }        
     }
 }
