@@ -9,7 +9,7 @@ public class ActivisionCalculateOfficer : MonoBehaviour
     [SerializeField] List<GameObject> objectsToDeactivate = new List<GameObject>();
     [SerializeField] int totalInvestmentDuration, estimatedFPS;
     float nextInvestment = 0;
-    [SerializeField] int totalInvestmentRequired, perInvestmentAmount;
+    public int totalInvestmentRequired, perInvestmentAmount;
     [SerializeField] TextMeshPro totalInvestmentRequiredText;
     [SerializeField] GameObject confettiExplosionPrefab, confettiItemStandOpeningPrefab;
     bool active = false;
@@ -79,7 +79,7 @@ public class ActivisionCalculateOfficer : MonoBehaviour
         }
     }
 
-    void VisualProcess(int _totalInvestmentRequired)
+    public void VisualProcess(int _totalInvestmentRequired)
     {
         totalInvestmentRequiredText.text = _totalInvestmentRequired.ToString();
         float procent = 1 - (_totalInvestmentRequired / (float)totalInvestmentRequiredAtTheBeginning);
@@ -119,6 +119,7 @@ public class ActivisionCalculateOfficer : MonoBehaviour
     void DeductFromPlayersMoney(int deductAmount)
     {
         PlayerManager.instance.playerCurrencyOfficer.Money -= deductAmount;
+        PlayerManager.instance.playerCurrencyOfficer.AddToInvestmentMoney(deductAmount);
     }
 
     bool CheckIfPlayerHasEnoughMoney()

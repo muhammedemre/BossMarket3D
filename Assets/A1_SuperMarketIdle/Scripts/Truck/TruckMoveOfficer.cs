@@ -43,10 +43,11 @@ public class TruckMoveOfficer : MonoBehaviour
 
     public void LeftTheMap()
     {
+        print("LEFT the map");
         isTruckParked = false;
         isMoving = false;
         //truckActor.relatedDepotTruckPointActor.belongingRoom.roomTruckOfficer.truckIsReadyToCall = true;
-        truckActor.relatedDepotTruckPointActor.belongingRoom.roomTruckOfficer.CallTheTruck();
+        truckActor.relatedDepotTruckPointActor.belongingRoom.roomTruckOfficer.CallTheTruck(false);
 
     }
 

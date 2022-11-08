@@ -7,6 +7,7 @@ public class PlayerCurrencyOfficer : MonoBehaviour
     [SerializeField] int money = -1;
     [SerializeField] int moneyAtStart;
     [SerializeField] AudioClip moneyAudioClip;
+    public int investedMoneyAmount = 0;
  
     public int Money
     {
@@ -34,6 +35,11 @@ public class PlayerCurrencyOfficer : MonoBehaviour
         }
         
         Money += moneyToDeposit;
+    }
+
+    public void AddToInvestmentMoney(int moneyToInvest) 
+    {
+        investedMoneyAmount += moneyToInvest;
     }
 
     public void GetMoneyDataFromDataManager(int moneyData)

@@ -15,8 +15,9 @@ public class TruckItemOrganizeOfficer : MonoBehaviour
     public void FillTheTruck()
     {
         RefreshThePool();
-        WareHouseOfficer levelsWareHouseOfficer = LevelManager.instance.levelCreateOfficer.currentLevel.GetComponent<LevelActor>().levelsWareHouseOfficer;
-        truckLuggage = levelsWareHouseOfficer.GetItemsFromThePool(truckCapacity);
+        print("FillTheTruck: "+this.name);
+        //WareHouseOfficer levelsWareHouseOfficer = LevelManager.instance.levelCreateOfficer.currentLevel.GetComponent<LevelActor>().levelsWareHouseOfficer;
+        truckLuggage = truckActor.relatedDepotTruckPointActor.wareHouseOfficer.GetItemsFromThePool(truckCapacity);
         PlaceTheItems();
     }
 

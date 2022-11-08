@@ -39,6 +39,7 @@ public class DataSaveAndLoadOfficer : MonoBehaviour
             ES3.Save("playerCapacityLevel", PlayerManager.instance.CapacityLevel);
             ES3.Save("playerSpeedLevel", PlayerManager.instance.SpeedLevel);
             ES3.Save("playerMoney", PlayerManager.instance.playerCurrencyOfficer.Money);
+            ES3.Save("investedMoney", PlayerManager.instance.playerCurrencyOfficer.investedMoneyAmount);
             ES3.Save("tutorialFinished", DataManager.instance.tutorialFinished);
             ES3.Save("musicGame", UIManager.instance.settingsMenuActor.musicState);
             ES3.Save("soundGame", UIManager.instance.settingsMenuActor.soundState);
@@ -46,7 +47,8 @@ public class DataSaveAndLoadOfficer : MonoBehaviour
 
             //ES3.Save("activeRooms", LevelManager.instance.levelCreateOfficer.currentLevel.GetComponent<LevelActor>().levelDataOfficer.activeRooms);
             Dictionary<int, RoomData> activeRoomsData = new Dictionary<int, RoomData>();
-            Dictionary<int, GameObject> tempActiveRooms = LevelManager.instance.levelCreateOfficer.currentLevel.GetComponent<LevelActor>().levelDataOfficer.activeRooms;
+            LevelDataOfficer levelDataOfficer = LevelManager.instance.levelCreateOfficer.currentLevel.GetComponent<LevelActor>().levelDataOfficer;
+            Dictionary<int, GameObject> tempActiveRooms = levelDataOfficer.activeRooms;
             foreach (int roomIndex in LevelManager.instance.levelCreateOfficer.currentLevel.GetComponent<LevelActor>().levelDataOfficer.activeRooms.Keys)
             {
                 activeRoomsData[roomIndex] = new RoomData();
@@ -59,6 +61,7 @@ public class DataSaveAndLoadOfficer : MonoBehaviour
             }
 
             ES3.Save("activeRoomsData", activeRoomsData);
+            ES3.Save("leftInvestments", levelDataOfficer.investmentLeftAmountsForActivisionPoints());
         }
         //print("PrepareTheDataPackage()3");
 
@@ -73,6 +76,7 @@ public class DataSaveAndLoadOfficer : MonoBehaviour
         PlayerManager.instance.SpeedLevel = ES3.Load("playerSpeedLevel", 0);
         //PlayerManager.instance.playerCurrencyOfficer.Money = ES3.Load("playerMoney", 0);
         PlayerManager.instance.playerCurrencyOfficer.GetMoneyDataFromDataManager(ES3.Load("playerMoney", -1)); // -1 is triggering the moneyAtStart addition
+        PlayerManager.instance.playerCurrencyOfficer.investedMoneyAmount = ES3.Load("playerMoney", 0);
         DataManager.instance.tutorialFinished = ES3.Load("tutorialFinished", false);
         UIManager.instance.settingsMenuActor.musicState = ES3.Load("musicGame", true);
         UIManager.instance.settingsMenuActor.soundState = ES3.Load("soundGame", true);
@@ -80,6 +84,8 @@ public class DataSaveAndLoadOfficer : MonoBehaviour
 
         Dictionary<int, GameObject> tempActiveRooms = LevelManager.instance.levelCreateOfficer.currentLevel.GetComponent<LevelActor>().levelRoomOfficer.levelRooms;
         Dictionary<int, RoomData> loadedRoomsData = ES3.Load("activeRoomsData", new Dictionary<int, RoomData>());
+
+        LevelDataOfficer levelDataOfficer = LevelManager.instance.levelCreateOfficer.currentLevel.GetComponent<LevelActor>().levelDataOfficer;
         foreach (int roomIndex in loadedRoomsData.Keys)
         {
             tempActiveRooms[roomIndex].GetComponent<RoomActor>().roomDataOfficer.workerLevels = loadedRoomsData[roomIndex].workerLevels;
@@ -89,16 +95,17 @@ public class DataSaveAndLoadOfficer : MonoBehaviour
             tempActiveRooms[roomIndex].GetComponent<RoomActor>().roomDataOfficer.roomActiveItemStands = loadedRoomsData[roomIndex].activeItemStands;
             tempActiveRooms[roomIndex].GetComponent<RoomActor>().roomFixturesOfficer.roomCashier.GetComponent<CashierActor>().moneyStackOfficer.thrownMoneyCounter = loadedRoomsData[roomIndex].thrownMoneyCount;
 
-            if (!LevelManager.instance.levelCreateOfficer.currentLevel.GetComponent<LevelActor>().levelDataOfficer.activeRooms.ContainsKey(roomIndex))
+            if (!levelDataOfficer.activeRooms.ContainsKey(roomIndex))
             {
-                LevelManager.instance.levelCreateOfficer.currentLevel.GetComponent<LevelActor>().levelDataOfficer.activeRooms.Add(roomIndex, tempActiveRooms[roomIndex]);
+                levelDataOfficer.activeRooms.Add(roomIndex, tempActiveRooms[roomIndex]);
             }
             else
             {
-                LevelManager.instance.levelCreateOfficer.currentLevel.GetComponent<LevelActor>().levelDataOfficer.activeRooms[roomIndex] = tempActiveRooms[roomIndex];
+                levelDataOfficer.activeRooms[roomIndex] = tempActiveRooms[roomIndex];
             }
         }
-        LevelManager.instance.levelCreateOfficer.currentLevel.GetComponent<LevelActor>().levelDataOfficer.AssignLevelDatas();
+        levelDataOfficer.AssignLevelDatas();
+        levelDataOfficer.AssignLeftInvestmentAmounts(ES3.Load("leftInvestments", new List<int>()));
     }
 
     public void LoadState()

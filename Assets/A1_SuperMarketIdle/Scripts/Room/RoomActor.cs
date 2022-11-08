@@ -27,7 +27,7 @@ public class RoomActor : MonoBehaviour
     public IEnumerator RoomActivate()
     {
         yield return new WaitForSeconds(UIManager.instance.splashVideoDuration + TruckFirstComeDelay);
-        roomTruckOfficer.CallTheTruck();
+        roomTruckOfficer.CallTheTruck(true);
         //roomFixturesOfficer.ActivateNavmeshSurfaceOnTheRoom();
     }
 

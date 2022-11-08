@@ -46,6 +46,11 @@ public class LevelPowerUpOfficer : MonoBehaviour
         StartCoroutine(DeactivateSpeedUpTheCustomers(duration));
     }
 
+    public void CoinRewardCalculateAndTrigger() 
+    {
+        int rewardAmount = (int)(PlayerManager.instance.playerCurrencyOfficer.investedMoneyAmount * coinRewardProcent);
+        GetCoinReward(rewardAmount);
+    }
     public void GetCoinReward(int coinAmount)
     {
         PlayerManager.instance.playerCurrencyOfficer.MoneyDepositToTheWallet(coinAmount);

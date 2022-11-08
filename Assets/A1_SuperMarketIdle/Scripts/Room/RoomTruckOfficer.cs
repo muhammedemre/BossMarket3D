@@ -13,9 +13,12 @@ public class RoomTruckOfficer : MonoBehaviour
         //CallTheTruck();// only to test on APK
     }
 
-    public void CallTheTruck() // Since there is no logic to arrange truck sends its called in TruckMoveOfficer with LeftTheMap().
+    public void CallTheTruck(bool fromRoomActivision) // Since there is no logic to arrange truck sends its called in TruckMoveOfficer with LeftTheMap().
     {
-        depotTruckPointActor.truckHandleOfficer.truck.truckItemOrganizeOfficer.FillTheTruck();
+        if (!fromRoomActivision)
+        {
+            depotTruckPointActor.truckHandleOfficer.truck.truckItemOrganizeOfficer.FillTheTruck();
+        }
         depotTruckPointActor.truckHandleOfficer.truck.truckMoveOfficer.CallTheTruck();
     }
 }
