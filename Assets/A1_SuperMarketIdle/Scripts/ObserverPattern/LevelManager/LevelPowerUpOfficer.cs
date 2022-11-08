@@ -7,6 +7,7 @@ public class LevelPowerUpOfficer : MonoBehaviour
 {
     public bool speedUpActive = false, coinBoostActive = false;
     public float coinBoostCoefficient = 1, speedUpCoefficient = 1, coinRewardProcent, cashierLiveDuration;
+    [SerializeField] int minCoinReward;
     float normalCustomerSpeed;
     [SerializeField] GameObject powerBoostBoxPrefab;
 
@@ -49,13 +50,15 @@ public class LevelPowerUpOfficer : MonoBehaviour
     public void CoinRewardCalculateAndTrigger() 
     {
         int rewardAmount = CoinRewardCalculate();
-        rewardAmount = rewardAmount < 500 ? 500 : rewardAmount;
+        
         GetCoinReward(rewardAmount);
     }
 
     public int CoinRewardCalculate() 
     {
-        return (int)(PlayerManager.instance.playerCurrencyOfficer.investedMoneyAmount * coinRewardProcent);
+        int rewardAmount = (int)(PlayerManager.instance.playerCurrencyOfficer.investedMoneyAmount * coinRewardProcent);
+        rewardAmount = rewardAmount < minCoinReward ? minCoinReward : rewardAmount;
+        return rewardAmount;
     }
     public void GetCoinReward(int coinAmount)
     {
