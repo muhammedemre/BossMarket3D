@@ -11,7 +11,6 @@ public class CashierWorkerActor : MonoBehaviour
     public void StartProcess(float _liveDuration)
     {
         liveDuration = _liveDuration;
-        print("PARTICLE RUN");
         particle.Play();
         deathTime = Time.time + liveDuration;
     }

@@ -656,6 +656,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: WareHouseAnchor
       objectReference: {fileID: 0}
+    - target: {fileID: 5845105489459903211, guid: 19ca8a7b4a6a84fa38aa65707f9bd626, type: 3}
+      propertyPath: wareHouseCapacity
+      value: 400
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 19ca8a7b4a6a84fa38aa65707f9bd626, type: 3}
 --- !u!4 &6035588986568260488 stripped
