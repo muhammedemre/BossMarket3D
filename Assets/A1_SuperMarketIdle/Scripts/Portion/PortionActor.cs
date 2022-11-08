@@ -25,7 +25,7 @@ public class PortionActor : MonoBehaviour
         //DataManager.instance.DataSaveAndLoadOfficer.SaveTheData();
     }
 
-    void TriggerTheRoomEvent() 
+    void TriggerTheRoomEvent()
     {
         EventsManager.instance.RoomEventsTrigger(false, relatedRoomActor.roomIndex);
     }
