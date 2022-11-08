@@ -24,9 +24,13 @@ public class GetInputOfficer : SerializedMonoBehaviour
     
     private void Update()
     {
-        if (!isFixedUpdate && touchable)
+        if (!isFixedUpdate && touchable && !UIManager.instance.noMoveUIOn)
         {
-            InputControl(); 
+            InputControl();
+        }
+        else if (UIManager.instance.noMoveUIOn && PlayerManager.instance.playerActor.playerAnimationOfficer.animator.GetInteger("State") != 0)
+        {
+            PlayerManager.instance.playerActor.playerAnimationOfficer.PlayIdle();
         }
     }
 

@@ -14,12 +14,13 @@ public class UITaskOfficers : MonoBehaviour
 
     public void UpgradeWindowClose()
     {
+        UIManager.instance.noMoveUIOn = false;
         UpgradeWindowSetState(false, null);
     }
 
     public void UpgradeWindowSetState(bool state, RoomActor relatedRoomActor)
     {
-
+        UIManager.instance.noMoveUIOn = state;
         UIManager.instance.upgradeWindow.transform.GetChild(0).gameObject.SetActive(state);
         if (state)
         {
@@ -30,11 +31,13 @@ public class UITaskOfficers : MonoBehaviour
 
     public void TruckUpgradeWindowClose()
     {
+        UIManager.instance.noMoveUIOn = false;
         OpenAndCloseTruckUpgradeWindow(false, null);
     }
 
     public void OpenAndCloseTruckUpgradeWindow(bool state, RoomActor relatedRoomActor)
     {
+        UIManager.instance.noMoveUIOn = state;
         UIManager.instance.truckUpgradeWindow.SetActive(state);
         if (state)
         {

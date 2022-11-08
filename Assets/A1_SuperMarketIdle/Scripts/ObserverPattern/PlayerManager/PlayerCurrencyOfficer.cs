@@ -39,6 +39,7 @@ public class PlayerCurrencyOfficer : MonoBehaviour
 
     public void AddToInvestmentMoney(int moneyToInvest) 
     {
+        print("AddToInvestmentMoney");
         investedMoneyAmount += moneyToInvest;
     }
 

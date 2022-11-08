@@ -14,6 +14,8 @@ public class UIManager : Manager
     public SettingsMenuActor settingsMenuActor;
     [SerializeField] TextMeshProUGUI moneyText;
     public float splashVideoDuration;
+
+    public bool noMoveUIOn = false;
     private void Awake()
     {
         StaticCheck();

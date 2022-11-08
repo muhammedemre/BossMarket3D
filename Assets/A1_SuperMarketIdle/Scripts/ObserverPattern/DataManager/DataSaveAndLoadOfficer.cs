@@ -76,7 +76,7 @@ public class DataSaveAndLoadOfficer : MonoBehaviour
         PlayerManager.instance.SpeedLevel = ES3.Load("playerSpeedLevel", 0);
         //PlayerManager.instance.playerCurrencyOfficer.Money = ES3.Load("playerMoney", 0);
         PlayerManager.instance.playerCurrencyOfficer.GetMoneyDataFromDataManager(ES3.Load("playerMoney", -1)); // -1 is triggering the moneyAtStart addition
-        PlayerManager.instance.playerCurrencyOfficer.investedMoneyAmount = ES3.Load("playerMoney", 0);
+        PlayerManager.instance.playerCurrencyOfficer.investedMoneyAmount = ES3.Load("investedMoney", 0);
         DataManager.instance.tutorialFinished = ES3.Load("tutorialFinished", false);
         UIManager.instance.settingsMenuActor.musicState = ES3.Load("musicGame", true);
         UIManager.instance.settingsMenuActor.soundState = ES3.Load("soundGame", true);
@@ -114,7 +114,7 @@ public class DataSaveAndLoadOfficer : MonoBehaviour
     }
     public void RefreshTheData()
     {
-        List<string> keyList = new List<string>() { "playerCapacityLevel", "playerSpeedLevel", "playerMoney", "tutorialFinished", "activeRoomsData", "musicGame", "soundGame", "vibrationGame", "leftInvestments" };
+        List<string> keyList = new List<string>() { "playerCapacityLevel", "playerSpeedLevel", "playerMoney", "tutorialFinished", "activeRoomsData", "musicGame", "soundGame", "vibrationGame", "leftInvestments", "investedMoney" };
         foreach (string key in keyList)
         {
             ES3.DeleteKey(key);
@@ -123,7 +123,7 @@ public class DataSaveAndLoadOfficer : MonoBehaviour
     }
     public void DisplayTheData()
     {
-        List<string> keyList = new List<string>() { "playerCapacityLevel", "playerSpeedLevel", "playerMoney", "tutorialFinished", "activeRoomsData", "musicGame", "soundGame", "vibrationGame", "leftInvestments" };
+        List<string> keyList = new List<string>() { "playerCapacityLevel", "playerSpeedLevel", "playerMoney", "tutorialFinished", "activeRoomsData", "musicGame", "soundGame", "vibrationGame", "leftInvestments", "investedMoney" };
         foreach (string key in keyList)
         {
             print(key+ " : " + ES3.Load(key)) ;
