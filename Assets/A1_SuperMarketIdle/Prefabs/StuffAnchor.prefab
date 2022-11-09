@@ -1625,6 +1625,7 @@ MonoBehaviour:
   heightEffectRate: 0.9
   stuffActor: {fileID: 7848928639664400818}
   takeItemFromTheStackFrequency: 0
+  audioSource: {fileID: 0}
 --- !u!114 &327796392549275211
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2000,6 +2001,7 @@ MonoBehaviour:
   reachTreshold: 0.8
   rotationSmoothTime: 0.3
   speedAtTheBeginning: 3.5
+  currentSpeed: 0
 --- !u!114 &7848928639664400783
 MonoBehaviour:
   m_ObjectHideFlags: 0
