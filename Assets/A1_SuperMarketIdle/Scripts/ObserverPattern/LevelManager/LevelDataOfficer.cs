@@ -14,10 +14,8 @@ public class LevelDataOfficer : SerializedMonoBehaviour
     {
         foreach (int roomIndex in activeRooms.Keys)
         {
-            print("AssignLevelDatas1: "+roomIndex);
             if (!levelActor.levelRoomOfficer.levelRooms[roomIndex].activeSelf)
             {
-                print("AssignLevelDatas2: " + roomIndex);
                 levelActor.levelRoomOfficer.ActivateARooom(roomIndex);
                 //levelActor.levelRoomOfficer.levelRooms[roomIndex].SetActive(true);
             }

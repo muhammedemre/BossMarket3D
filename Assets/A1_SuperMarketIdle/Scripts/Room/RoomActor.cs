@@ -33,10 +33,8 @@ public class RoomActor : MonoBehaviour
 
     void LetLevelDataIamActivated()
     {
-        print("LetLevelDataIamActivated1: "+ roomIndex);
         if (!LevelManager.instance.levelCreateOfficer.currentLevel.GetComponent<LevelActor>().levelDataOfficer.activeRooms.ContainsKey(roomIndex))
         {
-            print("LetLevelDataIamActivated2: " + roomIndex);
             LevelManager.instance.levelCreateOfficer.currentLevel.GetComponent<LevelActor>().levelDataOfficer.LetMeKnowRoomIsActivated(roomIndex, gameObject);
         }
 
