@@ -9,7 +9,10 @@ public class UITaskOfficers : MonoBehaviour
     public void SettingsButton(bool state)
     {
         UIManager.instance.settingsWindow.gameObject.SetActive(state);
-        buttonAudio.Play();
+        if (UIManager.instance.settingsMenuActor.soundState)
+        {
+            buttonAudio.Play();
+        }
     }
 
     public void UpgradeWindowClose()
@@ -60,6 +63,7 @@ public class UITaskOfficers : MonoBehaviour
 
     public void DeactivateAdsRewardPopUp()
     {
+        UIManager.instance.noMoveUIOn = false;
         UIManager.instance.adsRewardPopUpWindow.gameObject.SetActive(false);
     }
 }
