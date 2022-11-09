@@ -36,7 +36,8 @@ public class BoostAdsWindowTimerOfficer : MonoBehaviour
             yield return new WaitForSeconds(1);
         }
 
-        boostAdsWindowActor.ChangeBoostAdsWindowState(BoostAdsWindowState.Nan);
+        // boostAdsWindowActor.ChangeBoostAdsWindowState(BoostAdsWindowState.Nan);
+        boostAdsWindowActor.DeactiveState(true, null);
     }
 
     private void ChangeDurationText(int seconds)

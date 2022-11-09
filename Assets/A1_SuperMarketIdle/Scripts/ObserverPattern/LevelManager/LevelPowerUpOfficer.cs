@@ -166,7 +166,7 @@ public class LevelPowerUpOfficer : MonoBehaviour
     IEnumerator DeactiveBoostAdsWindowCheck()
     {
         yield return new WaitForSeconds(adsBoostDeactiveDuration);
-        UIManager.instance.boostAdsWindowActor.DeactiveAllStates();
+        UIManager.instance.boostAdsWindowActor.DeactiveState(false, null);
         NewAdsBoostCheck();
     }
 

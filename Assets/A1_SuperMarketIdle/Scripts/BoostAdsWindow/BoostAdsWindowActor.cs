@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using DG.Tweening;
+using UnityEngine.Events;
 
 public class BoostAdsWindowActor : MonoBehaviour
 {
@@ -11,6 +13,9 @@ public class BoostAdsWindowActor : MonoBehaviour
     public BoostAdsWindowTimerOfficer speed2XTimerOfficer;
     public BoostAdsWindowTimerOfficer revenue2XTimerOfficer;
     public BoostAdsWindowTimerOfficer cashierTimerOfficer;
+
+    public RectTransform leftRect, rightRect;
+    public float openDuration;
 
     private void Start()
     {
@@ -38,36 +43,94 @@ public class BoostAdsWindowActor : MonoBehaviour
 
     public void ChangeBoostAdsWindowState(BoostAdsWindowState state)
     {
-        boostAdsWindowState = state;
+        DeactiveState(false, () =>
+        {
+            boostAdsWindowState = state;
 
-        DeactiveAllStates();
+            if (state == BoostAdsWindowState.Speed2X)
+            {
+                OpenState(SpeedBoostAds);
+            }
+            else if (state == BoostAdsWindowState.Revenue2X)
+            {
+                OpenState(Revenue2XBoostAds);
+            }
+            else if (state == BoostAdsWindowState.Cashier)
+            {
+                OpenState(CashierBoostAds);
+            }
+            else if (state == BoostAdsWindowState.Nan)
+            {
+                LevelManager.instance.levelPowerUpOfficer.NewAdsBoostCheck();
+            }
+        });
+    }
 
-        if (state == BoostAdsWindowState.Speed2X)
+    void OpenState(GameObject adsObject)
+    {
+        adsObject.transform.position = rightRect.transform.position;
+        adsObject.transform.DOMove(leftRect.transform.position, openDuration);
+        adsObject.SetActive(true);
+    }
+
+    void CloseState(GameObject adsObject, UnityAction onComplete)
+    {
+        adsObject.transform.DOMove(rightRect.transform.position, openDuration).OnComplete(() =>
         {
-            SpeedBoostAds.SetActive(true);
+            adsObject.SetActive(false);
+            onComplete?.Invoke();
+        });
+    }
+
+    public void OpenTimer(BoostAdsWindowTimerOfficer timer)
+    {
+        if (boostAdsWindowState == BoostAdsWindowState.Speed2X)
+        {
+            CloseState(SpeedBoostAds, () =>
+            {
+                OpenState(SpeedTimerBoostAds);
+                timer.StartTimer();
+            });
         }
-        else if (state == BoostAdsWindowState.Revenue2X)
+        else if (boostAdsWindowState == BoostAdsWindowState.Revenue2X)
         {
-            Revenue2XBoostAds.SetActive(true);
+            CloseState(Revenue2XBoostAds, () =>
+            {
+                OpenState(Revenue2XTimerBoostAds);
+                timer.StartTimer();
+            });
         }
-        else if (state == BoostAdsWindowState.Cashier)
+        else if (boostAdsWindowState == BoostAdsWindowState.Cashier)
         {
-            CashierBoostAds.SetActive(true);
-        }
-        else if (state == BoostAdsWindowState.Nan)
-        {
-            LevelManager.instance.levelPowerUpOfficer.NewAdsBoostCheck();
+            CloseState(CashierBoostAds, () =>
+            {
+                OpenState(CashierTimerBoostAds);
+                timer.StartTimer();
+            });
         }
     }
 
-    public void DeactiveAllStates()
+    public void DeactiveState(bool isTimer, UnityAction onComplete)
     {
-        SpeedBoostAds.SetActive(false);
-        SpeedTimerBoostAds.SetActive(false);
-        Revenue2XBoostAds.SetActive(false);
-        Revenue2XTimerBoostAds.SetActive(false);
-        CashierBoostAds.SetActive(false);
-        CashierTimerBoostAds.SetActive(false);
+        Debug.Log(boostAdsWindowState);
+        if (boostAdsWindowState == BoostAdsWindowState.Speed2X)
+        {
+            CloseState(isTimer ? SpeedTimerBoostAds : SpeedBoostAds, onComplete);
+        }
+        else if (boostAdsWindowState == BoostAdsWindowState.Revenue2X)
+        {
+            CloseState(isTimer ? Revenue2XTimerBoostAds : Revenue2XBoostAds, onComplete);
+        }
+        else if (boostAdsWindowState == BoostAdsWindowState.Cashier)
+        {
+            CloseState(isTimer ? CashierTimerBoostAds : CashierBoostAds, onComplete);
+        }
+        else
+        {
+            onComplete?.Invoke();
+        }
+
+        if (isTimer) LevelManager.instance.levelPowerUpOfficer.NewAdsBoostCheck();
     }
 
     [Title("ButtonRandomlyBoostAdsWindow")]
