@@ -8,7 +8,7 @@ public class UIManager : Manager
     public static UIManager instance;
     public UITaskOfficers UITaskOfficers;
     public GameObject menu, inGameScreen, InGameMoney, InGameMoneyImage, settingsWindow, upgradeWindow, truckUpgradeWindow, dragToMoveScreen, splashScreenVideo;
-    public UpgradeAdsWindowActor upgradeAdsWindowActor;
+    public BoostAdsWindowActor boostAdsWindowActor;
     public AdsRewardPopUpActor adsRewardPopUpWindow;
     public Canvas mainCanvas;
     public SettingsMenuActor settingsMenuActor;

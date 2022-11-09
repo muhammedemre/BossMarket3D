@@ -12,12 +12,8 @@ public class LevelPowerUpOfficer : MonoBehaviour
     [SerializeField] GameObject powerBoostBoxPrefab;
 
     [SerializeField] float powerBoostBoxFrequency;
+    [SerializeField] float adsBoostFrequency, adsBoostDeactiveDuration;
     float nextPowerBoostBoxAdditionTime;
-
-    private void Start()
-    {
-        RandomlyUpgradeAdsWindow();
-    }
 
     private void Update()
     {
@@ -47,14 +43,14 @@ public class LevelPowerUpOfficer : MonoBehaviour
         StartCoroutine(DeactivateSpeedUpTheCustomers(duration));
     }
 
-    public void CoinRewardCalculateAndTrigger() 
+    public void CoinRewardCalculateAndTrigger()
     {
         int rewardAmount = CoinRewardCalculate();
-        
+
         GetCoinReward(rewardAmount);
     }
 
-    public int CoinRewardCalculate() 
+    public int CoinRewardCalculate()
     {
         int rewardAmount = (int)(PlayerManager.instance.playerCurrencyOfficer.investedMoneyAmount * coinRewardProcent);
         rewardAmount = rewardAmount < minCoinReward ? minCoinReward : rewardAmount;
@@ -152,17 +148,39 @@ public class LevelPowerUpOfficer : MonoBehaviour
         }
     }
 
+    public Coroutine lastNewAdsBoostCoroutine;
+    public Coroutine lastDeactiveAdsBoostCoroutine;
+    public void NewAdsBoostCheck()
+    {
+        if (lastNewAdsBoostCoroutine != null) StopCoroutine(lastNewAdsBoostCoroutine);
+        lastNewAdsBoostCoroutine = StartCoroutine(AdsBoostCheck());
+        lastDeactiveAdsBoostCoroutine = StartCoroutine(DeactiveBoostAdsWindowCheck());
+    }
+
+    IEnumerator AdsBoostCheck()
+    {
+        yield return new WaitForSeconds(adsBoostFrequency);
+        RandomlyBoostAdsWindow();
+    }
+
+    IEnumerator DeactiveBoostAdsWindowCheck()
+    {
+        yield return new WaitForSeconds(adsBoostDeactiveDuration);
+        UIManager.instance.boostAdsWindowActor.DeactiveAllStates();
+        NewAdsBoostCheck();
+    }
+
     public void ActivateCashier()
     {
         RoomActor theRoomPlayerIsIn = LevelManager.instance.levelCreateOfficer.currentLevel.GetComponent<LevelActor>().levelRoomOfficer.FindTheRoomThatPlayerIn();
         theRoomPlayerIsIn.roomFixturesOfficer.roomCashier.GetComponent<CashierActor>().CashierWorkerActivate(cashierLiveDuration);
     }
 
-    public void RandomlyUpgradeAdsWindow()
+    public void RandomlyBoostAdsWindow()
     {
-        UIManager.instance.upgradeAdsWindowActor.RandomOpenUpgradeAdsWindow();
+        if (lastNewAdsBoostCoroutine != null) StopCoroutine(lastNewAdsBoostCoroutine);
+        UIManager.instance.boostAdsWindowActor.RandomOpenBoostAdsWindow();
     }
-
 
     #region Button
 
@@ -184,18 +202,6 @@ public class LevelPowerUpOfficer : MonoBehaviour
     void ButtonRandomlyPlaceAPowerBoostBox()
     {
         RandomlyPlaceAPowerBoostBox();
-    }
-
-    [Title("RandomlyUpgradeAdsWindow")]
-    [Button("RandomlyUpgradeAdsWindow", ButtonSizes.Large)]
-    void ButtonRandomlyUpgradeAdsWindow()
-    {
-        if (!Application.isPlaying)
-        {
-            Debug.Log("Only playing!");
-            return;
-        }
-        RandomlyUpgradeAdsWindow();
     }
     #endregion
 }
