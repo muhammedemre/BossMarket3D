@@ -14,8 +14,10 @@ public class LevelDataOfficer : SerializedMonoBehaviour
     {
         foreach (int roomIndex in activeRooms.Keys)
         {
+            print("AssignLevelDatas1: "+roomIndex);
             if (!levelActor.levelRoomOfficer.levelRooms[roomIndex].activeSelf)
             {
+                print("AssignLevelDatas2: " + roomIndex);
                 levelActor.levelRoomOfficer.ActivateARooom(roomIndex);
                 //levelActor.levelRoomOfficer.levelRooms[roomIndex].SetActive(true);
             }
@@ -42,7 +44,6 @@ public class LevelDataOfficer : SerializedMonoBehaviour
     public void AssignLeftInvestmentAmounts(List<int> investmentLeftAmounts) 
     {
         investmentLeftAmountsTest = investmentLeftAmounts;
-        print("investmentLeftAmounts : "+ investmentLeftAmounts.Count);
         if (investmentLeftAmounts.Count > 0)
         {
             for (int i = 0; i < levelActivisionPoints.Count; i++)
