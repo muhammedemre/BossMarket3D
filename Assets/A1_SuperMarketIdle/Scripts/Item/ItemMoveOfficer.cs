@@ -83,7 +83,10 @@ public class ItemMoveOfficer : MonoBehaviour
             Debug.Log("CheckIfReachedItemStackPos");
             reachedTheStack = true;
             audioSource.pitch = (0.5f + CalculatePitch(positionHeight));
-            audioSource.Play();
+            if (UIManager.instance.settingsMenuActor.soundState)
+            {
+                audioSource.Play();
+            }
         }
     }
 

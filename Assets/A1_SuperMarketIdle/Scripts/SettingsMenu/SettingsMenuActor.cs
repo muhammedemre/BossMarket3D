@@ -11,16 +11,25 @@ public class SettingsMenuActor : MonoBehaviour
     public bool musicState, soundState, vibrationState;
     [SerializeField] float buttonMoveDuration;
     [SerializeField] Image musicBG, soundBG, vibrationBG;
+    [SerializeField] Sprite onBackgroundSprite, offBackgroundSprite;
+    [SerializeField] Sprite onSwitchSprite, offSwitchSprite;
     [SerializeField] GameObject musicOn, musicOff, soundOn, soundOff, vibrationOn, vibrationOff;
     [SerializeField] Color onColor, offColor;
     [SerializeField] AudioSource audioSource;
 
+    public void PreActivePanel()
+    {
+        PrepareTheStateButton(musicBG, music, musicLeft, musicRight, musicState);
+        PrepareTheStateButton(soundBG, sound, soundLeft, soundRight, soundState);
+        PrepareTheStateButton(vibrationBG, vibration, vibrationLeft, vibrationRight, vibrationState);
+    }
 
     public void ChangeMusicState()
     {
         musicState = !musicState;
-        PrepareTheButtonToTheNewState(musicBG, musicState, musicOn, musicOff);
-        //MoveButtonCircle(musicState, music, musicLeft, musicRight);
+        // PrepareTheButtonToTheNewState(musicBG, musicState, musicOn, musicOff);
+        PrepareTheStateButton(musicBG, music, musicLeft, musicRight, musicState);
+        // MoveButtonCircle(musicState, music, musicLeft, musicRight);
         if (UIManager.instance.settingsMenuActor.soundState)
         {
             audioSource.Play();
@@ -30,8 +39,9 @@ public class SettingsMenuActor : MonoBehaviour
     public void ChangeSoundState()
     {
         soundState = !soundState;
-        PrepareTheButtonToTheNewState(soundBG, soundState, soundOn, soundOff);
-        //MoveButtonCircle(soundState, sound, soundLeft, soundRight);
+        // PrepareTheButtonToTheNewState(soundBG, soundState, soundOn, soundOff);
+        PrepareTheStateButton(soundBG, sound, soundLeft, soundRight, soundState);
+        // MoveButtonCircle(soundState, sound, soundLeft, soundRight);
         if (UIManager.instance.settingsMenuActor.soundState)
         {
             audioSource.Play();
@@ -40,8 +50,9 @@ public class SettingsMenuActor : MonoBehaviour
     public void ChangeVibrationState()
     {
         vibrationState = !vibrationState;
-        PrepareTheButtonToTheNewState(vibrationBG, vibrationState, vibrationOn, vibrationOff);
-        //MoveButtonCircle(vibrationState, vibration, vibrationLeft, vibrationRight);
+        // PrepareTheButtonToTheNewState(vibrationBG, vibrationState, vibrationOn, vibrationOff);
+        PrepareTheStateButton(vibrationBG, vibration, vibrationLeft, vibrationRight, vibrationState);
+        // MoveButtonCircle(vibrationState, vibration, vibrationLeft, vibrationRight);
         if (UIManager.instance.settingsMenuActor.soundState)
         {
             audioSource.Play();
@@ -51,8 +62,10 @@ public class SettingsMenuActor : MonoBehaviour
     void MoveButtonCircle(bool state, RectTransform buttonCircle, RectTransform leftRect, RectTransform rightRect)
     {
         RectTransform targetRect = state ? rightRect : leftRect;
-        Vector2 targetRectPos = CalculateAnchorPosition(targetRect);
-        buttonCircle.DOAnchorPos(targetRectPos, buttonMoveDuration);
+        // Vector2 targetRectPos = CalculateAnchorPosition(targetRect);
+        // buttonCircle.DOAnchorPos(targetRectPos, buttonMoveDuration);
+        buttonCircle.DOMove(targetRect.transform.position, buttonMoveDuration);
+        buttonCircle.GetComponent<Image>().sprite = state ? onSwitchSprite : offSwitchSprite;
     }
 
     Vector3 CalculateAnchorPosition(RectTransform rect)
@@ -68,8 +81,15 @@ public class SettingsMenuActor : MonoBehaviour
 
     void PrepareTheButtonToTheNewState(Image button, bool state, GameObject onGameObject, GameObject offGameObject)
     {
-        button.DOColor(state? onColor : offColor, buttonMoveDuration);
-        onGameObject.SetActive(state? true : false);
-        offGameObject.SetActive(state? false : true);
+        button.DOColor(state ? onColor : offColor, buttonMoveDuration);
+        onGameObject.SetActive(state ? true : false);
+        offGameObject.SetActive(state ? false : true);
+    }
+
+    void PrepareTheStateButton(Image button, RectTransform buttonCircle, RectTransform leftRect, RectTransform rightRect, bool state)
+    {
+        button.sprite = state ? onBackgroundSprite : offBackgroundSprite;
+        buttonCircle.GetComponent<Image>().sprite = state ? onSwitchSprite : offSwitchSprite;
+        MoveButtonCircle(state, buttonCircle, leftRect, rightRect);
     }
 }

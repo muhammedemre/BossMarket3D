@@ -13,6 +13,8 @@ public class AdsRewardPopUpActor : MonoBehaviour
 
     public void ActivePopUpState(AdsRewardPopUpState state)
     {
+        UIManager.instance.noMoveUIOn = true;
+
         int reward = LevelManager.instance.levelPowerUpOfficer.CoinRewardCalculate();
         freeCoinText.text = $"{reward}$";
 
