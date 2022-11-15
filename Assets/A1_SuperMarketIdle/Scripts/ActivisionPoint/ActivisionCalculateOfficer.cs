@@ -61,6 +61,10 @@ public class ActivisionCalculateOfficer : MonoBehaviour
                 {
                     AdsManager.instance.adsActor.adsShowOfficer.ShowInterstitialAd(MyGoogleAdMob.AdPlacement.RoomAdd);
                 }
+                else if (objectToActivate.TryGetComponent<ItemStandActor>(out ItemStandActor ia))
+                {
+                    AdsManager.instance.adsActor.adsShowOfficer.ShowInterstitialAd(MyGoogleAdMob.AdPlacement.ItemStandOpen);
+                }
                 if (UIManager.instance.settingsMenuActor.soundState)
                 {
                     audioSource.Play();
@@ -100,7 +104,7 @@ public class ActivisionCalculateOfficer : MonoBehaviour
         {
             GameObject tempconfettiItemStandOpening = Instantiate(confettiItemStandOpeningPrefab, objectToActivate.transform.position, confettiItemStandOpeningPrefab.transform.rotation, objectToActivate.transform);
             Destroy(tempconfettiItemStandOpening, 5f);
-            AdsManager.instance.adsActor.adsShowOfficer.ShowInterstitialAd(MyGoogleAdMob.AdPlacement.ItemStandOpen);
+            //AdsManager.instance.adsActor.adsShowOfficer.ShowInterstitialAd(MyGoogleAdMob.AdPlacement.ItemStandOpen);
         }
         Destroy(tempExplosionConfetti, 5f);
         StartCoroutine(DestroyDelayer());
