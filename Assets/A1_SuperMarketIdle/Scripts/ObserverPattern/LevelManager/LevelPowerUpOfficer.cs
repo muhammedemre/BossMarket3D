@@ -22,6 +22,7 @@ public class LevelPowerUpOfficer : MonoBehaviour
 
     public void FillTheRoomsItemStands()
     {
+
         RoomActor theRoomPlayerIsIn = LevelManager.instance.levelCreateOfficer.currentLevel.GetComponent<LevelActor>().levelRoomOfficer.FindTheRoomThatPlayerIn();
         foreach (Transform itemStand in theRoomPlayerIsIn.roomFixturesOfficer.roomItemStands)
         {
@@ -29,7 +30,6 @@ public class LevelPowerUpOfficer : MonoBehaviour
             int neededAmountToGetfull = itemStandActor.itemStandItemHandleOfficer.capacity - itemStandActor.itemStandItemHandleOfficer.storageList.Count;
             itemStandActor.itemStandItemHandleOfficer.AddItemsToStandFromScript(neededAmountToGetfull);
         }
-
     }
 
     public void SpeedUp2xTheCustomersForSomeTime(float seconds)
@@ -148,27 +148,27 @@ public class LevelPowerUpOfficer : MonoBehaviour
         }
     }
 
-    public Coroutine lastNewAdsBoostCoroutine;
-    public Coroutine lastDeactiveAdsBoostCoroutine;
-    public void NewAdsBoostCheck()
-    {
-        if (lastNewAdsBoostCoroutine != null) StopCoroutine(lastNewAdsBoostCoroutine);
-        lastNewAdsBoostCoroutine = StartCoroutine(AdsBoostCheck());
-        lastDeactiveAdsBoostCoroutine = StartCoroutine(DeactiveBoostAdsWindowCheck());
-    }
+    // public Coroutine lastNewAdsBoostCoroutine;
+    // public Coroutine lastDeactiveAdsBoostCoroutine;
+    // public void NewAdsBoostCheck()
+    // {
+    //     if (lastNewAdsBoostCoroutine != null) StopCoroutine(lastNewAdsBoostCoroutine);
+    //     lastNewAdsBoostCoroutine = StartCoroutine(AdsBoostCheck());
+    //     lastDeactiveAdsBoostCoroutine = StartCoroutine(DeactiveBoostAdsWindowCheck());
+    // }
 
-    IEnumerator AdsBoostCheck()
-    {
-        yield return new WaitForSeconds(adsBoostFrequency);
-        RandomlyBoostAdsWindow();
-    }
+    // IEnumerator AdsBoostCheck()
+    // {
+    //     yield return new WaitForSeconds(adsBoostFrequency);
+    //     RandomlyBoostAdsWindow();
+    // }
 
-    IEnumerator DeactiveBoostAdsWindowCheck()
-    {
-        yield return new WaitForSeconds(adsBoostDeactiveDuration);
-        UIManager.instance.boostAdsWindowActor.DeactiveState(false, null);
-        NewAdsBoostCheck();
-    }
+    // IEnumerator DeactiveBoostAdsWindowCheck()
+    // {
+    //     yield return new WaitForSeconds(adsBoostDeactiveDuration);
+    //     UIManager.instance.boostAdsWindowActor.DeactiveState(false, null);
+    //     NewAdsBoostCheck();
+    // }
 
     public void ActivateCashier()
     {
@@ -176,11 +176,11 @@ public class LevelPowerUpOfficer : MonoBehaviour
         theRoomPlayerIsIn.roomFixturesOfficer.roomCashier.GetComponent<CashierActor>().CashierWorkerActivate(cashierLiveDuration);
     }
 
-    public void RandomlyBoostAdsWindow()
-    {
-        if (lastNewAdsBoostCoroutine != null) StopCoroutine(lastNewAdsBoostCoroutine);
-        UIManager.instance.boostAdsWindowActor.RandomOpenBoostAdsWindow();
-    }
+    // public void RandomlyBoostAdsWindow()
+    // {
+    //     if (lastNewAdsBoostCoroutine != null) StopCoroutine(lastNewAdsBoostCoroutine);
+    //     UIManager.instance.boostAdsWindowActor.RandomOpenBoostAdsWindow();
+    // }
 
     #region Button
 

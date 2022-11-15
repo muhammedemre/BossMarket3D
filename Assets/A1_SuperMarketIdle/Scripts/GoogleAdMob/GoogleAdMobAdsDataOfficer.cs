@@ -32,6 +32,7 @@ namespace MyGoogleAdMob
         SpeedUpCustomer,
         ReFillTheRoomRW,
         WorkerUpgrade,
-        Cashier
+        Cashier,
+        ItemStandOpen,
     }
 }

@@ -2051,7 +2051,7 @@ PrefabInstance:
       objectReference: {fileID: 272286819790941350, guid: 39fadec493c2e494fb30e62236c7b533, type: 3}
     - target: {fileID: 359984796356686059, guid: 39fadec493c2e494fb30e62236c7b533, type: 3}
       propertyPath: totalInvestmentRequired
-      value: 2500
+      value: 3250
       objectReference: {fileID: 0}
     - target: {fileID: 359984796356686060, guid: 39fadec493c2e494fb30e62236c7b533, type: 3}
       propertyPath: m_Name
@@ -2059,7 +2059,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 579661313590651603, guid: 39fadec493c2e494fb30e62236c7b533, type: 3}
       propertyPath: totalInvestmentRequired
-      value: 1500
+      value: 1950
       objectReference: {fileID: 0}
     - target: {fileID: 579661313590651604, guid: 39fadec493c2e494fb30e62236c7b533, type: 3}
       propertyPath: m_Name
@@ -2289,6 +2289,10 @@ PrefabInstance:
       propertyPath: objectToActivate
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 4453625050974033361, guid: 39fadec493c2e494fb30e62236c7b533, type: 3}
+      propertyPath: totalInvestmentRequired
+      value: 3900
+      objectReference: {fileID: 0}
     - target: {fileID: 4453625050974033366, guid: 39fadec493c2e494fb30e62236c7b533, type: 3}
       propertyPath: m_Name
       value: RoomAddActivisonPointAnchor4
@@ -2359,7 +2363,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 6843ddf0b91638c408ca3c66936ae1c9, type: 2}
     - target: {fileID: 6975127531288028369, guid: 39fadec493c2e494fb30e62236c7b533, type: 3}
       propertyPath: totalInvestmentRequired
-      value: 2500
+      value: 3250
       objectReference: {fileID: 0}
     - target: {fileID: 6975127531288028374, guid: 39fadec493c2e494fb30e62236c7b533, type: 3}
       propertyPath: m_Name
@@ -2395,7 +2399,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7590877491735105364, guid: 39fadec493c2e494fb30e62236c7b533, type: 3}
       propertyPath: totalInvestmentRequired
-      value: 2000
+      value: 2600
       objectReference: {fileID: 0}
     - target: {fileID: 7780118910879050444, guid: 39fadec493c2e494fb30e62236c7b533, type: 3}
       propertyPath: m_IsActive
@@ -2411,7 +2415,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7785301412214323519, guid: 39fadec493c2e494fb30e62236c7b533, type: 3}
       propertyPath: totalInvestmentRequired
-      value: 3000
+      value: 3900
       objectReference: {fileID: 0}
     - target: {fileID: 7785301412214323519, guid: 39fadec493c2e494fb30e62236c7b533, type: 3}
       propertyPath: objectsToDeactivate.Array.size
@@ -3136,7 +3140,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 727778582782852037, guid: 2fece483a43474e7da58a9b64a420429, type: 3}
       propertyPath: totalInvestmentRequired
-      value: 350
+      value: 455
       objectReference: {fileID: 0}
     - target: {fileID: 875825279968381872, guid: 2fece483a43474e7da58a9b64a420429, type: 3}
       propertyPath: relatedWareHouseOfficer
@@ -3264,7 +3268,7 @@ PrefabInstance:
       objectReference: {fileID: 8533264231950618917}
     - target: {fileID: 3686494139116920575, guid: 2fece483a43474e7da58a9b64a420429, type: 3}
       propertyPath: totalInvestmentRequired
-      value: 1000
+      value: 1300
       objectReference: {fileID: 0}
     - target: {fileID: 3686494139116920575, guid: 2fece483a43474e7da58a9b64a420429, type: 3}
       propertyPath: objectsToDeactivate.Array.size
@@ -3394,6 +3398,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7128504292979814929, guid: 2fece483a43474e7da58a9b64a420429, type: 3}
+      propertyPath: totalInvestmentRequired
+      value: 292
+      objectReference: {fileID: 0}
     - target: {fileID: 7230256254309843557, guid: 2fece483a43474e7da58a9b64a420429, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -3409,6 +3417,10 @@ PrefabInstance:
     - target: {fileID: 7347773571761777183, guid: 2fece483a43474e7da58a9b64a420429, type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7475777865668625530, guid: 2fece483a43474e7da58a9b64a420429, type: 3}
+      propertyPath: totalInvestmentRequired
+      value: 130
       objectReference: {fileID: 0}
     - target: {fileID: 7475777865668625533, guid: 2fece483a43474e7da58a9b64a420429, type: 3}
       propertyPath: m_Name
@@ -3432,7 +3444,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7938679598394470399, guid: 2fece483a43474e7da58a9b64a420429, type: 3}
       propertyPath: totalInvestmentRequired
-      value: 200
+      value: 260
       objectReference: {fileID: 0}
     - target: {fileID: 8006879336891854760, guid: 2fece483a43474e7da58a9b64a420429, type: 3}
       propertyPath: serializationData.Prefab
@@ -4777,7 +4789,7 @@ PrefabInstance:
       objectReference: {fileID: 272286819790941350, guid: 39fadec493c2e494fb30e62236c7b533, type: 3}
     - target: {fileID: 359984796356686059, guid: 39fadec493c2e494fb30e62236c7b533, type: 3}
       propertyPath: totalInvestmentRequired
-      value: 1750
+      value: 2275
       objectReference: {fileID: 0}
     - target: {fileID: 359984796356686060, guid: 39fadec493c2e494fb30e62236c7b533, type: 3}
       propertyPath: m_Name
@@ -4789,7 +4801,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 579661313590651603, guid: 39fadec493c2e494fb30e62236c7b533, type: 3}
       propertyPath: totalInvestmentRequired
-      value: 900
+      value: 1170
       objectReference: {fileID: 0}
     - target: {fileID: 579661313590651604, guid: 39fadec493c2e494fb30e62236c7b533, type: 3}
       propertyPath: m_Name
@@ -4989,7 +5001,7 @@ PrefabInstance:
       objectReference: {fileID: 2936515676787262119}
     - target: {fileID: 4453625050974033361, guid: 39fadec493c2e494fb30e62236c7b533, type: 3}
       propertyPath: totalInvestmentRequired
-      value: 5000
+      value: 6500
       objectReference: {fileID: 0}
     - target: {fileID: 4453625050974033361, guid: 39fadec493c2e494fb30e62236c7b533, type: 3}
       propertyPath: objectsToDeactivate.Array.size
@@ -5105,7 +5117,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: e74ba4e2a2960c9408671199fe83b8e7, type: 2}
     - target: {fileID: 6975127531288028369, guid: 39fadec493c2e494fb30e62236c7b533, type: 3}
       propertyPath: totalInvestmentRequired
-      value: 1750
+      value: 2275
       objectReference: {fileID: 0}
     - target: {fileID: 6975127531288028374, guid: 39fadec493c2e494fb30e62236c7b533, type: 3}
       propertyPath: m_Name
@@ -5141,7 +5153,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7590877491735105364, guid: 39fadec493c2e494fb30e62236c7b533, type: 3}
       propertyPath: totalInvestmentRequired
-      value: 1250
+      value: 1625
       objectReference: {fileID: 0}
     - target: {fileID: 7602640136091086113, guid: 39fadec493c2e494fb30e62236c7b533, type: 3}
       propertyPath: m_IsActive
@@ -5157,7 +5169,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7785301412214323519, guid: 39fadec493c2e494fb30e62236c7b533, type: 3}
       propertyPath: totalInvestmentRequired
-      value: 1500
+      value: 1950
       objectReference: {fileID: 0}
     - target: {fileID: 7785301412214323519, guid: 39fadec493c2e494fb30e62236c7b533, type: 3}
       propertyPath: objectsToDeactivate.Array.size
@@ -5417,7 +5429,7 @@ PrefabInstance:
       objectReference: {fileID: 272286819790941350, guid: 39fadec493c2e494fb30e62236c7b533, type: 3}
     - target: {fileID: 359984796356686059, guid: 39fadec493c2e494fb30e62236c7b533, type: 3}
       propertyPath: totalInvestmentRequired
-      value: 1000
+      value: 1300
       objectReference: {fileID: 0}
     - target: {fileID: 359984796356686060, guid: 39fadec493c2e494fb30e62236c7b533, type: 3}
       propertyPath: m_Name
@@ -5425,7 +5437,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 579661313590651603, guid: 39fadec493c2e494fb30e62236c7b533, type: 3}
       propertyPath: totalInvestmentRequired
-      value: 600
+      value: 780
       objectReference: {fileID: 0}
     - target: {fileID: 579661313590651604, guid: 39fadec493c2e494fb30e62236c7b533, type: 3}
       propertyPath: m_Name
@@ -5640,6 +5652,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 6177798290700232320}
     - target: {fileID: 4453625050974033361, guid: 39fadec493c2e494fb30e62236c7b533, type: 3}
+      propertyPath: totalInvestmentRequired
+      value: 3900
+      objectReference: {fileID: 0}
+    - target: {fileID: 4453625050974033361, guid: 39fadec493c2e494fb30e62236c7b533, type: 3}
       propertyPath: objectsToDeactivate.Array.size
       value: 4
       objectReference: {fileID: 0}
@@ -5749,7 +5765,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6975127531288028369, guid: 39fadec493c2e494fb30e62236c7b533, type: 3}
       propertyPath: totalInvestmentRequired
-      value: 1000
+      value: 1300
       objectReference: {fileID: 0}
     - target: {fileID: 6975127531288028374, guid: 39fadec493c2e494fb30e62236c7b533, type: 3}
       propertyPath: m_Name
@@ -5785,7 +5801,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7590877491735105364, guid: 39fadec493c2e494fb30e62236c7b533, type: 3}
       propertyPath: totalInvestmentRequired
-      value: 750
+      value: 975
       objectReference: {fileID: 0}
     - target: {fileID: 7780118910879050444, guid: 39fadec493c2e494fb30e62236c7b533, type: 3}
       propertyPath: m_IsActive
@@ -5797,7 +5813,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7785301412214323519, guid: 39fadec493c2e494fb30e62236c7b533, type: 3}
       propertyPath: totalInvestmentRequired
-      value: 800
+      value: 1040
       objectReference: {fileID: 0}
     - target: {fileID: 7785301412214323519, guid: 39fadec493c2e494fb30e62236c7b533, type: 3}
       propertyPath: objectsToDeactivate.Array.size
@@ -6840,7 +6856,7 @@ PrefabInstance:
       objectReference: {fileID: 272286819790941350, guid: 39fadec493c2e494fb30e62236c7b533, type: 3}
     - target: {fileID: 359984796356686059, guid: 39fadec493c2e494fb30e62236c7b533, type: 3}
       propertyPath: totalInvestmentRequired
-      value: 600
+      value: 780
       objectReference: {fileID: 0}
     - target: {fileID: 359984796356686060, guid: 39fadec493c2e494fb30e62236c7b533, type: 3}
       propertyPath: m_Name
@@ -6852,7 +6868,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 579661313590651603, guid: 39fadec493c2e494fb30e62236c7b533, type: 3}
       propertyPath: totalInvestmentRequired
-      value: 150
+      value: 195
       objectReference: {fileID: 0}
     - target: {fileID: 579661313590651604, guid: 39fadec493c2e494fb30e62236c7b533, type: 3}
       propertyPath: m_Name
@@ -7080,7 +7096,7 @@ PrefabInstance:
       objectReference: {fileID: 6200035852688558382}
     - target: {fileID: 4453625050974033361, guid: 39fadec493c2e494fb30e62236c7b533, type: 3}
       propertyPath: totalInvestmentRequired
-      value: 2000
+      value: 2600
       objectReference: {fileID: 0}
     - target: {fileID: 4453625050974033361, guid: 39fadec493c2e494fb30e62236c7b533, type: 3}
       propertyPath: objectsToDeactivate.Array.size
@@ -7184,7 +7200,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: ee5318a6b8b0c604ebbab30a594f1598, type: 2}
     - target: {fileID: 6975127531288028369, guid: 39fadec493c2e494fb30e62236c7b533, type: 3}
       propertyPath: totalInvestmentRequired
-      value: 400
+      value: 520
       objectReference: {fileID: 0}
     - target: {fileID: 6975127531288028374, guid: 39fadec493c2e494fb30e62236c7b533, type: 3}
       propertyPath: m_Name
@@ -7220,7 +7236,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7590877491735105364, guid: 39fadec493c2e494fb30e62236c7b533, type: 3}
       propertyPath: totalInvestmentRequired
-      value: 250
+      value: 325
       objectReference: {fileID: 0}
     - target: {fileID: 7692975651245720331, guid: 39fadec493c2e494fb30e62236c7b533, type: 3}
       propertyPath: m_Enabled
@@ -7240,7 +7256,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7785301412214323519, guid: 39fadec493c2e494fb30e62236c7b533, type: 3}
       propertyPath: totalInvestmentRequired
-      value: 500
+      value: 650
       objectReference: {fileID: 0}
     - target: {fileID: 7785301412214323519, guid: 39fadec493c2e494fb30e62236c7b533, type: 3}
       propertyPath: objectsToDeactivate.Array.size

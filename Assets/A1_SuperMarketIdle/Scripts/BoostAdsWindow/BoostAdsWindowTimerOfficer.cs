@@ -9,26 +9,22 @@ using DG.Tweening;
 public class BoostAdsWindowTimerOfficer : MonoBehaviour
 {
     public BoostAdsWindowActor boostAdsWindowActor;
-    public BoostAdsWindowTimerType timerType;
-    public int durationForSeconds = 0;
+    public BoostAdsType boostAdsType;
     public Image progressImage;
     public TextMeshProUGUI durationText;
 
-    private void OnEnable()
+    public void StartTimer(int duration)
     {
-        ChangeDurationText(durationForSeconds);
+        // StopCoroutine(LevelManager.instance.levelPowerUpOfficer.lastDeactiveAdsBoostCoroutine);
+
+        ChangeDurationText(duration);
+        StartCoroutine(TimeCounter(duration));
     }
 
-    public void StartTimer()
+    IEnumerator TimeCounter(int duration)
     {
-        StopCoroutine(LevelManager.instance.levelPowerUpOfficer.lastDeactiveAdsBoostCoroutine);
-        StartCoroutine(TimeCounter());
-    }
-
-    IEnumerator TimeCounter()
-    {
-        int timer = durationForSeconds;
-        DOTween.To(value => progressImage.fillAmount = value, 1f, 0f, durationForSeconds);
+        int timer = duration;
+        DOTween.To(value => progressImage.fillAmount = value, 1f, 0f, duration);
         while (timer > 0)
         {
             timer--;
@@ -36,8 +32,7 @@ public class BoostAdsWindowTimerOfficer : MonoBehaviour
             yield return new WaitForSeconds(1);
         }
 
-        // boostAdsWindowActor.ChangeBoostAdsWindowState(BoostAdsWindowState.Nan);
-        boostAdsWindowActor.DeactiveState(true, null);
+        boostAdsWindowActor.Revive(boostAdsType);
     }
 
     private void ChangeDurationText(int seconds)
@@ -46,5 +41,3 @@ public class BoostAdsWindowTimerOfficer : MonoBehaviour
         durationText.text = time.ToString(@"mm\:ss");
     }
 }
-
-public enum BoostAdsWindowTimerType { Speed, Revenue, Cashier }

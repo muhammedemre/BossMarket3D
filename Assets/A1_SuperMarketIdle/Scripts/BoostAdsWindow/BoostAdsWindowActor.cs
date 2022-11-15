@@ -1,179 +1,54 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using Sirenix.OdinInspector;
 using UnityEngine;
-using DG.Tweening;
-using UnityEngine.Events;
 
-public class BoostAdsWindowActor : MonoBehaviour
+public class BoostAdsWindowActor : SerializedMonoBehaviour
 {
-    public BoostAdsWindowState boostAdsWindowState { get; private set; } = BoostAdsWindowState.Nan;
-    public GameObject SpeedBoostAds, SpeedTimerBoostAds, Revenue2XBoostAds, Revenue2XTimerBoostAds, CashierBoostAds, CashierTimerBoostAds, fillShelvesBoostAds, fillShelvesTimerBoostAds;
-    public BoostAdsWindowTimerOfficer speed2XTimerOfficer;
-    public BoostAdsWindowTimerOfficer revenue2XTimerOfficer;
-    public BoostAdsWindowTimerOfficer cashierTimerOfficer;
-    public BoostAdsWindowTimerOfficer fillShelvesTimerOfficer;
+    public Dictionary<BoostAdsType, BoostAd> boostAds;
+    public float reviveDurationSeconds;
 
-    public RectTransform leftRect, rightRect;
-    public float openDuration;
-
-    private void Start()
+    private void Awake()
     {
-        LevelManager.instance.levelPowerUpOfficer.NewAdsBoostCheck();
+        foreach (KeyValuePair<BoostAdsType, BoostAd> boostAd in boostAds)
+        {
+            boostAd.Value.timerOfficer.gameObject.SetActive(false);
+            boostAd.Value.buttonActor.gameObject.SetActive(true);
+        }
     }
 
-    public void RandomOpenBoostAdsWindow()
+    public void OpenTimerOfficer(BoostAdsType boostAdsType)
     {
-        StopCoroutine(LevelManager.instance.levelPowerUpOfficer.lastNewAdsBoostCoroutine);
-        int index = UnityEngine.Random.Range(0, Enum.GetValues(typeof(BoostAdsWindowType)).Length);
+        boostAds[boostAdsType].timerOfficer.transform.position = boostAds[boostAdsType].closeRect.transform.position;
+        boostAds[boostAdsType].timerOfficer.gameObject.SetActive(true);
+        boostAds[boostAdsType].timerOfficer.StartTimer(boostAds[boostAdsType].durationForSeconds);
 
-        if (index == ((int)BoostAdsWindowType.Speed2X))
+        boostAds[boostAdsType].buttonActor.transform.DOMove(boostAds[boostAdsType].closeRect.transform.position, reviveDurationSeconds / 2f).OnComplete(() =>
         {
-            ChangeBoostAdsWindowState(BoostAdsWindowState.Speed2X);
-        }
-        else if (index == ((int)BoostAdsWindowType.Revenue2X))
-        {
-            ChangeBoostAdsWindowState(BoostAdsWindowState.Revenue2X);
-        }
-        else if (index == ((int)BoostAdsWindowType.Cashier))
-        {
-            ChangeBoostAdsWindowState(BoostAdsWindowState.Cashier);
-        }
-        // else if (index == ((int)BoostAdsWindowType.FillShelves))
-        // {
-        //     ChangeBoostAdsWindowState(BoostAdsWindowState.FillShelves);
-        // }
-    }
+            boostAds[boostAdsType].buttonActor.gameObject.SetActive(false);
 
-    public void ChangeBoostAdsWindowState(BoostAdsWindowState state)
-    {
-        DeactiveState(false, () =>
-        {
-            boostAdsWindowState = state;
-
-            if (state == BoostAdsWindowState.Speed2X)
-            {
-                OpenState(SpeedBoostAds);
-            }
-            else if (state == BoostAdsWindowState.Revenue2X)
-            {
-                OpenState(Revenue2XBoostAds);
-            }
-            else if (state == BoostAdsWindowState.Cashier)
-            {
-                OpenState(CashierBoostAds);
-            }
-            // else if (state == BoostAdsWindowState.FillShelves)
-            // {
-            //     OpenState(fillShelvesBoostAds);
-            // }
-            else if (state == BoostAdsWindowState.Nan)
-            {
-                LevelManager.instance.levelPowerUpOfficer.NewAdsBoostCheck();
-            }
+            boostAds[boostAdsType].timerOfficer.transform.DOMove(boostAds[boostAdsType].openRect.transform.position, reviveDurationSeconds / 2f);
         });
     }
 
-    void OpenState(GameObject adsObject)
+    public void Revive(BoostAdsType boostAdsType)
     {
-        adsObject.transform.position = rightRect.transform.position;
-        adsObject.transform.DOMove(leftRect.transform.position, openDuration);
-        adsObject.SetActive(true);
-    }
-
-    void CloseState(GameObject adsObject, UnityAction onComplete)
-    {
-        adsObject.transform.DOMove(rightRect.transform.position, openDuration).OnComplete(() =>
+        boostAds[boostAdsType].timerOfficer.transform.DOMove(boostAds[boostAdsType].closeRect.transform.position, reviveDurationSeconds / 2f).OnComplete(() =>
         {
-            adsObject.SetActive(false);
-            onComplete?.Invoke();
+            boostAds[boostAdsType].timerOfficer.gameObject.SetActive(false);
+
+            boostAds[boostAdsType].buttonActor.transform.position = boostAds[boostAdsType].closeRect.transform.position;
+            boostAds[boostAdsType].buttonActor.gameObject.SetActive(true);
+            boostAds[boostAdsType].buttonActor.transform.DOMove(boostAds[boostAdsType].openRect.transform.position, reviveDurationSeconds / 2f);
         });
     }
-
-    public void OpenTimer(BoostAdsWindowTimerOfficer timer)
-    {
-        if (boostAdsWindowState == BoostAdsWindowState.Speed2X)
-        {
-            CloseState(SpeedBoostAds, () =>
-            {
-                OpenState(SpeedTimerBoostAds);
-                timer.StartTimer();
-            });
-        }
-        else if (boostAdsWindowState == BoostAdsWindowState.Revenue2X)
-        {
-            CloseState(Revenue2XBoostAds, () =>
-            {
-                OpenState(Revenue2XTimerBoostAds);
-                timer.StartTimer();
-            });
-        }
-        else if (boostAdsWindowState == BoostAdsWindowState.Cashier)
-        {
-            CloseState(CashierBoostAds, () =>
-            {
-                OpenState(CashierTimerBoostAds);
-                timer.StartTimer();
-            });
-        }
-        // else if (boostAdsWindowState == BoostAdsWindowState.FillShelves)
-        // {
-        //     CloseState(fillShelvesBoostAds, () =>
-        //     {
-        //         OpenState(fillShelvesTimerBoostAds);
-        //         timer.StartTimer();
-        //     });
-        // }
-    }
-
-    public void DeactiveState(bool isTimer, UnityAction onComplete)
-    {
-        Debug.Log(boostAdsWindowState);
-        if (boostAdsWindowState == BoostAdsWindowState.Speed2X)
-        {
-            CloseState(isTimer ? SpeedTimerBoostAds : SpeedBoostAds, onComplete);
-        }
-        else if (boostAdsWindowState == BoostAdsWindowState.Revenue2X)
-        {
-            CloseState(isTimer ? Revenue2XTimerBoostAds : Revenue2XBoostAds, onComplete);
-        }
-        else if (boostAdsWindowState == BoostAdsWindowState.Cashier)
-        {
-            CloseState(isTimer ? CashierTimerBoostAds : CashierBoostAds, onComplete);
-        }
-        // else if (boostAdsWindowState == BoostAdsWindowState.FillShelves)
-        // {
-        //     CloseState(isTimer ? fillShelvesTimerBoostAds : fillShelvesBoostAds, onComplete);
-        // }
-        else
-        {
-            onComplete?.Invoke();
-        }
-
-        if (isTimer) LevelManager.instance.levelPowerUpOfficer.NewAdsBoostCheck();
-    }
-
-    [Title("ButtonRandomlyBoostAdsWindow")]
-    [Button("ButtonRandomlyBoostAdsWindow", ButtonSizes.Gigantic)]
-    void ButtonRandomlyBoostAdsWindow()
-    {
-        if (!Application.isPlaying)
-        {
-            Debug.Log("Only playing!");
-            return;
-        }
-        LevelManager.instance.levelPowerUpOfficer.RandomlyBoostAdsWindow();
-    }
 }
 
-public enum BoostAdsWindowType
+public class BoostAd
 {
-    Speed2X, Revenue2X, Cashier,
-    // FillShelves
+    public BoostAdsWindowButtonActor buttonActor;
+    public BoostAdsWindowTimerOfficer timerOfficer;
+    public RectTransform closeRect, openRect;
+    public int durationForSeconds;
 }
-public enum BoostAdsWindowState
-{
-    Nan, Speed2X, Revenue2X, Cashier,
-    // FillShelves
-}
+public enum BoostAdsType { Speed, Revenue, Cashier, FillShelves }

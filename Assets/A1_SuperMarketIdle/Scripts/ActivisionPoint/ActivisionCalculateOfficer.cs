@@ -100,6 +100,7 @@ public class ActivisionCalculateOfficer : MonoBehaviour
         {
             GameObject tempconfettiItemStandOpening = Instantiate(confettiItemStandOpeningPrefab, objectToActivate.transform.position, confettiItemStandOpeningPrefab.transform.rotation, objectToActivate.transform);
             Destroy(tempconfettiItemStandOpening, 5f);
+            AdsManager.instance.adsActor.adsShowOfficer.ShowInterstitialAd(MyGoogleAdMob.AdPlacement.ItemStandOpen);
         }
         Destroy(tempExplosionConfetti, 5f);
         StartCoroutine(DestroyDelayer());
