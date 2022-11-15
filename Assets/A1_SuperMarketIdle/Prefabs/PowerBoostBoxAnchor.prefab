@@ -106,7 +106,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   powerBoostBoxActor: {fileID: 5343074900492688940}
   modelList:
-  - {fileID: 702115359867342231}
   - {fileID: 8107715751120154283}
 --- !u!1 &1109747753981748748
 GameObject:
@@ -9827,11 +9826,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9544deb3871c3fc4a99dbbba8ec2a467, type: 3}
---- !u!1 &702115359867342231 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 493416290964536103, guid: 9544deb3871c3fc4a99dbbba8ec2a467, type: 3}
-  m_PrefabInstance: {fileID: 1109747753361733296}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1175848335470288636 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2249528667125917772, guid: 9544deb3871c3fc4a99dbbba8ec2a467, type: 3}

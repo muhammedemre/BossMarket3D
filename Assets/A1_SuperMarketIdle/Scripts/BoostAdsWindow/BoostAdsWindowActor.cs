@@ -9,10 +9,11 @@ using UnityEngine.Events;
 public class BoostAdsWindowActor : MonoBehaviour
 {
     public BoostAdsWindowState boostAdsWindowState { get; private set; } = BoostAdsWindowState.Nan;
-    public GameObject SpeedBoostAds, SpeedTimerBoostAds, Revenue2XBoostAds, Revenue2XTimerBoostAds, CashierBoostAds, CashierTimerBoostAds;
+    public GameObject SpeedBoostAds, SpeedTimerBoostAds, Revenue2XBoostAds, Revenue2XTimerBoostAds, CashierBoostAds, CashierTimerBoostAds, fillShelvesBoostAds, fillShelvesTimerBoostAds;
     public BoostAdsWindowTimerOfficer speed2XTimerOfficer;
     public BoostAdsWindowTimerOfficer revenue2XTimerOfficer;
     public BoostAdsWindowTimerOfficer cashierTimerOfficer;
+    public BoostAdsWindowTimerOfficer fillShelvesTimerOfficer;
 
     public RectTransform leftRect, rightRect;
     public float openDuration;
@@ -39,6 +40,10 @@ public class BoostAdsWindowActor : MonoBehaviour
         {
             ChangeBoostAdsWindowState(BoostAdsWindowState.Cashier);
         }
+        // else if (index == ((int)BoostAdsWindowType.FillShelves))
+        // {
+        //     ChangeBoostAdsWindowState(BoostAdsWindowState.FillShelves);
+        // }
     }
 
     public void ChangeBoostAdsWindowState(BoostAdsWindowState state)
@@ -59,6 +64,10 @@ public class BoostAdsWindowActor : MonoBehaviour
             {
                 OpenState(CashierBoostAds);
             }
+            // else if (state == BoostAdsWindowState.FillShelves)
+            // {
+            //     OpenState(fillShelvesBoostAds);
+            // }
             else if (state == BoostAdsWindowState.Nan)
             {
                 LevelManager.instance.levelPowerUpOfficer.NewAdsBoostCheck();
@@ -108,6 +117,14 @@ public class BoostAdsWindowActor : MonoBehaviour
                 timer.StartTimer();
             });
         }
+        // else if (boostAdsWindowState == BoostAdsWindowState.FillShelves)
+        // {
+        //     CloseState(fillShelvesBoostAds, () =>
+        //     {
+        //         OpenState(fillShelvesTimerBoostAds);
+        //         timer.StartTimer();
+        //     });
+        // }
     }
 
     public void DeactiveState(bool isTimer, UnityAction onComplete)
@@ -125,6 +142,10 @@ public class BoostAdsWindowActor : MonoBehaviour
         {
             CloseState(isTimer ? CashierTimerBoostAds : CashierBoostAds, onComplete);
         }
+        // else if (boostAdsWindowState == BoostAdsWindowState.FillShelves)
+        // {
+        //     CloseState(isTimer ? fillShelvesTimerBoostAds : fillShelvesBoostAds, onComplete);
+        // }
         else
         {
             onComplete?.Invoke();
@@ -146,5 +167,13 @@ public class BoostAdsWindowActor : MonoBehaviour
     }
 }
 
-public enum BoostAdsWindowType { Speed2X, Revenue2X, Cashier }
-public enum BoostAdsWindowState { Nan, Speed2X, Revenue2X, Cashier }
+public enum BoostAdsWindowType
+{
+    Speed2X, Revenue2X, Cashier,
+    // FillShelves
+}
+public enum BoostAdsWindowState
+{
+    Nan, Speed2X, Revenue2X, Cashier,
+    // FillShelves
+}

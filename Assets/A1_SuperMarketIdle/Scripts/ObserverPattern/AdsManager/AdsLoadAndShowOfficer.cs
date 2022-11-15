@@ -12,6 +12,7 @@ public class AdsLoadAndShowOfficer : MonoBehaviour
     public GoogleAdMobAdsDataOfficer googleAdMobAdsDataOfficer;
     public Dictionary<AdPlacement, RewardedAd> RewardedAds { get; private set; } = new Dictionary<AdPlacement, RewardedAd>();
     public Dictionary<AdPlacement, InterstitialAd> InterstitialAds { get; private set; } = new Dictionary<AdPlacement, InterstitialAd>();
+    public bool isRemoveAds = false;
 
     private void OnEnable()
     {
@@ -93,6 +94,11 @@ public class AdsLoadAndShowOfficer : MonoBehaviour
     /// <param name="onRewarded">Returns the reward amount</param>
     public void ShowRewardedAd(AdPlacement placement, UnityAction<double> onRewarded, UnityAction<string> onError = null)
     {
+        if (isRemoveAds)
+        {
+            onRewarded?.Invoke(0);
+            return;
+        }
         if (!RewardedAds.ContainsKey(placement))
         {
             Debug.Log($"Not found '{placement.ToString()}' ad");
@@ -117,6 +123,7 @@ public class AdsLoadAndShowOfficer : MonoBehaviour
 
     public void ShowInterstitialAd(AdPlacement placement, UnityAction onClosed = null)
     {
+        if (isRemoveAds) return;
         if (!InterstitialAds.ContainsKey(placement))
         {
             Debug.Log($"Not found '{placement.ToString()}' ad");

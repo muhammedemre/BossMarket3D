@@ -11,7 +11,8 @@ public class PowerBoostModelOfficer : MonoBehaviour
 
     public enum PowerBoostType
     {
-        GiftBox, Case
+        // GiftBox, 
+        Case
     }
 
     private void Awake()
